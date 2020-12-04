@@ -1,2 +1,3 @@
 rootProject.name = "com.wallee.android.till.sample"
 include ':till'
+include ':interception'
