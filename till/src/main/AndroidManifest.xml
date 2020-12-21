@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.wallee.android.till.sample.till">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="false"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name="com.wallee.android.till.sample.till.MainActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="com.wallee.android.TILL_APPLICATION" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.wallee.android.till.sample.till.CheckApiServiceCompatibilityActivity" />
+        <activity android:name="com.wallee.android.till.sample.till.AuthorizeTransactionActivity" />
+        <activity android:name="com.wallee.android.till.sample.till.TransactionResponseActivity" />
+        <activity android:name="com.wallee.android.till.sample.till.CancelLastTransactionOperationActivity" />
+        <activity android:name="com.wallee.android.till.sample.till.CancelationResultActivity" />
+        <activity android:name="com.wallee.android.till.sample.till.CompleteTransactionActivity" />
+        <activity android:name="com.wallee.android.till.sample.till.TransactionCompletionResponseActivity" />
+        <activity android:name="com.wallee.android.till.sample.till.VoidTransactionActivity" />
+        <activity android:name="com.wallee.android.till.sample.till.TransactionVoidResponseActivity" />
+        <activity android:name="com.wallee.android.till.sample.till.ExecuteSubmissionActivity" />
+        <activity android:name="com.wallee.android.till.sample.till.SubmissionResultActivity" />
+        <activity android:name="com.wallee.android.till.sample.till.ExecuteTransmissionActivity" />
+        <activity android:name="com.wallee.android.till.sample.till.TransmissionResultActivity" />
+        <activity android:name="com.wallee.android.till.sample.till.ExecuteFinalBalanceActivity" />
+        <activity android:name="com.wallee.android.till.sample.till.FinalBalanceResultActivity" />
+
+    </application>
+
+</manifest>
