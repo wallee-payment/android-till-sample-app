@@ -41,6 +41,7 @@ public class TransactionResponseActivity extends AppCompatActivity {
                 "transactionTime - " + response.getTransactionTime() + "\n" +
                 "reserveReference - " + response.getReserveReference() + "\n" +
                 "acquirerId - " + response.getAcquirerId() + "\n" +
-                "receipts - " + response.getReceipts();
+                "receipts - " + response.getReceipts() + "\n" +
+                "cardIssuingCountry - " + response.getCardIssuingCountry();
     }
 }
