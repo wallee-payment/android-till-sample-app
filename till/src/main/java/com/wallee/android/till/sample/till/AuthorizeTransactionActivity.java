@@ -1,13 +1,17 @@
 package com.wallee.android.till.sample.till;
 
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.wallee.android.till.sdk.ApiClient;
 import com.wallee.android.till.sdk.data.LineItem;
@@ -15,11 +19,14 @@ import com.wallee.android.till.sdk.data.Transaction;
 import com.wallee.android.till.sdk.data.TransactionProcessingBehavior;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
 
 public class AuthorizeTransactionActivity extends AppCompatActivity {
     private ApiClient client;
+    private String languageCode;
+    private Spinner languageSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +38,22 @@ public class AuthorizeTransactionActivity extends AppCompatActivity {
         final EditText currencyField = findViewById(R.id.editTextCurrency);
         final EditText customTextField = findViewById(R.id.editTextCustomText);
         final CheckBox shouldReserve = findViewById(R.id.shouldReserve);
+        final CheckBox selectLanguage = findViewById(R.id.selectLanguage);
+        languageSpinner = findViewById(R.id.languageSpinner);
+
+
+        selectLanguage.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    languageSpinner.setVisibility(View.VISIBLE);
+                } else {
+                    languageSpinner.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
+        setUpLanguagesSpinner();
 
         findViewById(R.id.authorizeButton).setOnClickListener(view -> {
             String amountString = amountField.getText().toString();
@@ -58,7 +81,12 @@ public class AuthorizeTransactionActivity extends AppCompatActivity {
             if (!customTextString.isEmpty()) {
                 transactionBuilder.setCustomText(customTextString);
             }
+
+            if (selectLanguage.isChecked())
+                transactionBuilder.setLanguage(languageCode);
+
             transaction = transactionBuilder.build();
+
 
             try {
                 client.authorizeTransaction(transaction);
@@ -73,6 +101,28 @@ public class AuthorizeTransactionActivity extends AppCompatActivity {
 
         client = new ApiClient(new MockResponseHandler(this));
         client.bind(this);
+    }
+
+    private void setUpLanguagesSpinner() {
+        ArrayList<Language> languages = new Languages().getLanguages();
+        ArrayAdapter arrayAdapter
+                = new ArrayAdapter(
+                this,
+                android.R.layout.simple_spinner_item,
+                languages);
+
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);;
+        languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                languageCode = languages.get(position).getCode();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        languageSpinner.setAdapter(arrayAdapter);
     }
 
     @Override
