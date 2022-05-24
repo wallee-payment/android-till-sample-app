@@ -42,6 +42,10 @@ public class TransactionResponseActivity extends AppCompatActivity {
                 "reserveReference - " + response.getReserveReference() + "\n" +
                 "acquirerId - " + response.getAcquirerId() + "\n" +
                 "receipts - " + response.getReceipts() + "\n" +
-                "cardIssuingCountry - " + response.getCardIssuingCountry();
+                "cardIssuingCountry - " + response.getCardIssuingCountry() + "\n" +
+                "cardAppLabel - " + response.getCardAppLabel() + "\n" +
+                "cardAppId - " + response.getCardAppId() + "\n" +
+                "amountTip - " + response.getAmountTip();
+
     }
 }
