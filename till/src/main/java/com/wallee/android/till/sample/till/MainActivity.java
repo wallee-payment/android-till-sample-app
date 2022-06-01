@@ -1,7 +1,10 @@
 package com.wallee.android.till.sample.till;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -43,5 +46,19 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.executeFinalBalance).setOnClickListener(v -> {
             startActivity(new Intent(this, ExecuteFinalBalanceActivity.class));
         });
+
+        requestOverlayPermission();
+    }
+
+
+    // Android 10 needs overlay permission to get transaction response
+    private void requestOverlayPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            if (!Settings.canDrawOverlays(this)) {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Uri.parse("package:" + getPackageName()));
+                startActivityForResult(intent, 0);
+            }
+        }
     }
 }
