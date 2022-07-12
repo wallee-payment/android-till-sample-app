@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.provider.Settings;
 
 import androidx.appcompat.app.AppCompatActivity;
+import com.wallee.android.till.sdk.TillLog;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,7 +49,17 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, ExecuteFinalBalanceActivity.class));
         });
 
+
+        // init & bind
+        TillLog.getInstance().bind(this);
+
+        TillLog.debug("VSD Test Debug");
+        TillLog.error("VSD Test Error");
+        TillLog.warning("VSD Test Warning");
+        TillLog.lAssert("VSD Send Assert");
+
         requestOverlayPermission();
+
     }
 
 
@@ -60,5 +72,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, 0);
             }
         }
+
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // unbind
+        TillLog.getInstance().unbind(this);
     }
 }
