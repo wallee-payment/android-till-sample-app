@@ -1,6 +1,7 @@
 package com.wallee.android.till.sample.till;
 
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.wallee.android.till.sdk.ApiClient;
+import com.wallee.android.till.sdk.TillLog;
 import com.wallee.android.till.sdk.data.LineItem;
 import com.wallee.android.till.sdk.data.Transaction;
 import com.wallee.android.till.sdk.data.TransactionProcessingBehavior;
@@ -87,6 +89,7 @@ public class AuthorizeTransactionActivity extends AppCompatActivity {
 
             transaction = transactionBuilder.build();
 
+            TillLog.debug("VSD Start Transaction of amount  -> " + amountString);
 
             try {
                 client.authorizeTransaction(transaction);
@@ -101,6 +104,7 @@ public class AuthorizeTransactionActivity extends AppCompatActivity {
 
         client = new ApiClient(new MockResponseHandler(this));
         client.bind(this);
+        TillLog.debug("SampleApp: Wallee ApiClient is just bound!");
     }
 
     private void setUpLanguagesSpinner() {
@@ -123,6 +127,7 @@ public class AuthorizeTransactionActivity extends AppCompatActivity {
         });
 
         languageSpinner.setAdapter(arrayAdapter);
+
     }
 
     @Override

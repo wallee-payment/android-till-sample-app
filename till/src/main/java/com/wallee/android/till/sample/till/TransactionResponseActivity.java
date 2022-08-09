@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.wallee.android.till.sdk.TillLog;
 import com.wallee.android.till.sdk.Utils;
 import com.wallee.android.till.sdk.data.TransactionResponse;
 
@@ -17,6 +18,9 @@ public class TransactionResponseActivity extends AppCompatActivity {
         setContentView(R.layout.transaction_response_activity);
 
         TransactionResponse response = Utils.getTransactionResponse(getIntent().getExtras());
+
+        TillLog.debug("Log transaction response  -> " + responseToString(response));
+
 
         if (response != null) {
             TextView textViewResult = findViewById(R.id.textViewResult);
