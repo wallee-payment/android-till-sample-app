@@ -49,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, ExecuteFinalBalanceActivity.class));
         });
 
+        findViewById(R.id.exit).setOnClickListener(v -> {
+            finish();
+        });
+
 
         // init & bind
         TillLog.getInstance().bind(this);
