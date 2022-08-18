@@ -22,6 +22,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name="com.wallee.android.till.sample.interception.response.TransactionResponseActivity" />
     </application>
 
 </manifest>
