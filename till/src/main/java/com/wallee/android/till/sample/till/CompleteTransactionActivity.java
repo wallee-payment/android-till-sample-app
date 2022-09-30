@@ -38,7 +38,7 @@ public class CompleteTransactionActivity extends AppCompatActivity {
 
             TransactionCompletion transaction = new TransactionCompletion.Builder(lineItems)
                     .setCurrency(Currency.getInstance(currencyString))
-                    .setReserveReference(Long.parseLong(referenceString))
+                    .setReserveReference(referenceString)
                     .build();
 
             try {

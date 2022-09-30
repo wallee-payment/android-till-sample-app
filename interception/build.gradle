@@ -33,7 +33,7 @@ dependencies {
     if (getCurrentGitBranch().equalsIgnoreCase("master")) {
         implementation 'com.wallee.android.till:sdk:0.9.16'
     } else {
-        implementation 'com.wallee.android.till:sdk-dev:0.9.16'
+        implementation 'com.wallee.android.till:sdk-dev:0.9.17'
     }
 }
 
