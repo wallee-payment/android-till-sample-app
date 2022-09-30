@@ -22,7 +22,7 @@ public class VoidTransactionActivity extends AppCompatActivity {
         findViewById(R.id.voidButton).setOnClickListener(view -> {
             String referenceString = editTextReference.getText().toString();
             try {
-                client.voidTransaction(new TransactionVoid(Long.valueOf(referenceString), editTextAcquirerId.getText().toString()));
+                client.voidTransaction(new TransactionVoid(referenceString, editTextAcquirerId.getText().toString()));
             } catch (Exception e) {
                 e.printStackTrace();
             }
