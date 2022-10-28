@@ -7,6 +7,7 @@ import com.wallee.android.till.sdk.ResponseHandler;
 import com.wallee.android.till.sdk.Utils;
 import com.wallee.android.till.sdk.data.CancelationResult;
 import com.wallee.android.till.sdk.data.FinalBalanceResult;
+import com.wallee.android.till.sdk.data.GeneratePanTokenResponse;
 import com.wallee.android.till.sdk.data.SubmissionResult;
 import com.wallee.android.till.sdk.data.TransactionCompletionResponse;
 import com.wallee.android.till.sdk.data.TransactionResponse;
@@ -66,6 +67,13 @@ class MockResponseHandler extends ResponseHandler {
     public void executeFinalBalanceReply(FinalBalanceResult finalBalanceResult) {
         Intent intent = new Intent(context, FinalBalanceResultActivity.class);
         intent.putExtras(Utils.toBundle(finalBalanceResult));
+        context.startActivity(intent);
+    }
+
+    @Override
+    public void executeGeneratePanTokenResponse(GeneratePanTokenResponse generatePanTokenResponse) {
+        Intent intent = new Intent(context, GeneratePanTokenResponseActivity.class);
+        intent.putExtras(Utils.toBundle(generatePanTokenResponse));
         context.startActivity(intent);
     }
 }

@@ -49,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, ExecuteFinalBalanceActivity.class));
         });
 
+        findViewById(R.id.generatePanTokenReq).setOnClickListener(v -> {
+            startActivity(new Intent(this, GeneratePanTokenActivity.class));
+        });
+
         findViewById(R.id.exit).setOnClickListener(v -> {
             finish();
         });

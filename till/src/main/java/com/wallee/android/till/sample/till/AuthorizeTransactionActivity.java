@@ -41,6 +41,7 @@ public class AuthorizeTransactionActivity extends AppCompatActivity {
         final EditText customTextField = findViewById(R.id.editTextCustomText);
         final CheckBox shouldReserve = findViewById(R.id.shouldReserve);
         final CheckBox selectLanguage = findViewById(R.id.selectLanguage);
+        final CheckBox generatePanToken = findViewById(R.id.generatePanToken);
         languageSpinner = findViewById(R.id.languageSpinner);
 
 
@@ -79,7 +80,8 @@ public class AuthorizeTransactionActivity extends AppCompatActivity {
                     .setMerchantReference("MREF-123")
                     .setTransactionProcessingBehavior(
                             shouldReserve.isChecked() ? TransactionProcessingBehavior.RESERVE : TransactionProcessingBehavior.COMPLETE_IMMEDIATELY
-                    );
+                    )
+                    .setGeneratePanToken(generatePanToken.isChecked() ? true : false);
             if (!customTextString.isEmpty()) {
                 transactionBuilder.setCustomText(customTextString);
             }
