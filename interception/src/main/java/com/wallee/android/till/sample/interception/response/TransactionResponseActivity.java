@@ -42,6 +42,7 @@ public class TransactionResponseActivity extends AppCompatActivity {
                 "cardIssuingCountry - " + response.getCardIssuingCountry() + "\n" +
                 "cardAppLabel - " + response.getCardAppLabel() + "\n" +
                 "cardAppId - " + response.getCardAppId() + "\n" +
-                "amountTip - " + response.getAmountTip();
+                "amountTip - " + response.getAmountTip() + "\n" +
+                "panToken - " + response.getPanToken();
     }
 }

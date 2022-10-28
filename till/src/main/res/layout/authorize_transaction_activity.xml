@@ -71,6 +71,16 @@
             app:layout_constraintTop_toBottomOf="@+id/editTextCustomText" />
 
         <CheckBox
+            android:id="@+id/generatePanToken"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="180dp"
+            android:layout_marginTop="20dp"
+            android:text="Generate PanToken"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shouldReserve" />
+
+        <CheckBox
             android:id="@+id/shouldReserve"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -96,11 +106,11 @@
             android:id="@+id/authorizeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="20dp"
             android:text="Authorize"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/languageSpinner" />
+            app:layout_constraintTop_toBottomOf="@+id/generatePanToken" />
 
         <Button
             android:id="@+id/returnButton"

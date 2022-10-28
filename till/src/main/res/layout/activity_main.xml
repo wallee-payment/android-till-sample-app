@@ -14,63 +14,70 @@
             android:id="@+id/checkApiServiceCompatibility"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
             android:text="Check Api Service Compatibility" />
 
         <Button
             android:id="@+id/authorizeTransaction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
             android:text="Authorize Transaction" />
 
         <Button
             android:id="@+id/cancelLastTransactionOperation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
             android:text="Cancel Last Transaction Operation" />
 
         <Button
             android:id="@+id/completeTransaction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
             android:text="Complete Transaction" />
 
         <Button
             android:id="@+id/voidTransaction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
             android:text="Void Transaction" />
 
         <Button
             android:id="@+id/executeTransmission"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
             android:text="Execute Transmission" />
 
         <Button
             android:id="@+id/executeSubmission"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
             android:text="Execute Submission" />
 
         <Button
             android:id="@+id/executeFinalBalance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
             android:text="Execute Final Balance" />
+
+        <Button
+            android:id="@+id/generatePanTokenReq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="GENERATE PAN TOKEN" />
 
         <Button
             android:id="@+id/exit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
             android:text="Exit" />
 
     </LinearLayout>

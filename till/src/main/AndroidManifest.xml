@@ -41,6 +41,8 @@
         <activity android:name="com.wallee.android.till.sample.till.TransmissionResultActivity" />
         <activity android:name="com.wallee.android.till.sample.till.ExecuteFinalBalanceActivity" />
         <activity android:name="com.wallee.android.till.sample.till.FinalBalanceResultActivity" />
+        <activity android:name="com.wallee.android.till.sample.till.GeneratePanTokenActivity" />
+        <activity android:name="com.wallee.android.till.sample.till.GeneratePanTokenResponseActivity" />
 
     </application>
 
