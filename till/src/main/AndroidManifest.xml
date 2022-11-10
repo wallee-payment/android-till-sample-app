@@ -3,8 +3,8 @@
     package="com.wallee.android.till.sample.till">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:allowBackup="true"
@@ -15,35 +15,40 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="com.wallee.android.till.sample.till.MainActivity"
-            android:label="@string/app_name"
-            android:exported="true">
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.wallee.android.TILL_APPLICATION" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name="com.wallee.android.till.sample.till.CheckApiServiceCompatibilityActivity" />
-        <activity android:name="com.wallee.android.till.sample.till.AuthorizeTransactionActivity" />
-        <activity android:name="com.wallee.android.till.sample.till.TransactionResponseActivity" />
-        <activity android:name="com.wallee.android.till.sample.till.CancelLastTransactionOperationActivity" />
-        <activity android:name="com.wallee.android.till.sample.till.CancelationResultActivity" />
-        <activity android:name="com.wallee.android.till.sample.till.CompleteTransactionActivity" />
-        <activity android:name="com.wallee.android.till.sample.till.TransactionCompletionResponseActivity" />
-        <activity android:name="com.wallee.android.till.sample.till.VoidTransactionActivity" />
-        <activity android:name="com.wallee.android.till.sample.till.TransactionVoidResponseActivity" />
-        <activity android:name="com.wallee.android.till.sample.till.ExecuteSubmissionActivity" />
-        <activity android:name="com.wallee.android.till.sample.till.SubmissionResultActivity" />
-        <activity android:name="com.wallee.android.till.sample.till.ExecuteTransmissionActivity" />
-        <activity android:name="com.wallee.android.till.sample.till.TransmissionResultActivity" />
-        <activity android:name="com.wallee.android.till.sample.till.ExecuteFinalBalanceActivity" />
-        <activity android:name="com.wallee.android.till.sample.till.FinalBalanceResultActivity" />
-        <activity android:name="com.wallee.android.till.sample.till.GeneratePanTokenActivity" />
-        <activity android:name="com.wallee.android.till.sample.till.GeneratePanTokenResponseActivity" />
-
+        <activity android:name=".CheckApiServiceCompatibilityActivity" />
+        <activity android:name=".AuthorizeTransactionActivity" />
+        <activity android:name=".TransactionResponseActivity" />
+        <activity android:name=".CancelLastTransactionOperationActivity" />
+        <activity android:name=".CancelationResultActivity" />
+        <activity android:name=".CompleteTransactionActivity" />
+        <activity android:name=".TransactionCompletionResponseActivity" />
+        <activity android:name=".VoidTransactionActivity" />
+        <activity android:name=".TransactionVoidResponseActivity" />
+        <activity android:name=".ExecuteSubmissionActivity" />
+        <activity android:name=".SubmissionResultActivity" />
+        <activity android:name=".ExecuteTransmissionActivity" />
+        <activity android:name=".TransmissionResultActivity" />
+        <activity android:name=".ExecuteFinalBalanceActivity" />
+        <activity android:name=".FinalBalanceResultActivity" />
+        <activity android:name=".GeneratePanTokenActivity" />
+        <activity android:name=".GeneratePanTokenResponseActivity" />
+        <activity
+            android:name=".PinpadInformationResponseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PinpadInformationActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
