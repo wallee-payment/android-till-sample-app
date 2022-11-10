@@ -53,6 +53,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, GeneratePanTokenActivity.class));
         });
 
+        findViewById(R.id.getConfigInfo).setOnClickListener(v -> {
+            startActivity(new Intent(this, PinpadInformationActivity.class));
+
+        });
         findViewById(R.id.exit).setOnClickListener(v -> {
             finish();
         });
