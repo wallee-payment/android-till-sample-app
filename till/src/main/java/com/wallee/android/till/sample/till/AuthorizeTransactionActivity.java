@@ -1,17 +1,16 @@
 package com.wallee.android.till.sample.till;
 
 import android.os.Bundle;
-import android.os.RemoteException;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.wallee.android.till.sdk.ApiClient;
@@ -30,6 +29,9 @@ public class AuthorizeTransactionActivity extends AppCompatActivity {
     private String languageCode;
     private Spinner languageSpinner;
 
+    // This regex accepts strings of a length exactly 3 alphanumerical
+    private final static String CURRENCY_REGEX = "[a-zA-Z]{3}";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,26 +46,24 @@ public class AuthorizeTransactionActivity extends AppCompatActivity {
         final CheckBox generatePanToken = findViewById(R.id.generatePanToken);
         languageSpinner = findViewById(R.id.languageSpinner);
 
-
-        selectLanguage.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    languageSpinner.setVisibility(View.VISIBLE);
-                } else {
-                    languageSpinner.setVisibility(View.INVISIBLE);
-                }
+        selectLanguage.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                languageSpinner.setVisibility(View.VISIBLE);
+            } else {
+                languageSpinner.setVisibility(View.GONE);
             }
         });
 
         setUpLanguagesSpinner();
 
         findViewById(R.id.authorizeButton).setOnClickListener(view -> {
+
             String amountString = amountField.getText().toString();
             String currencyString = currencyField.getText().toString();
             String customTextString = customTextField.getText().toString();
-            if (amountString.isEmpty() || currencyString.isEmpty()) {
-                Toast.makeText(this, "Please fill Amount and Currency fields!", Toast.LENGTH_SHORT).show();
+
+            if (!areAllFieldsValid(amountString, currencyString)) {
+                Toast.makeText(this, "Amount fields or currency fields are empty or not well formatted", Toast.LENGTH_LONG).show();
                 return;
             }
 
@@ -78,10 +78,9 @@ public class AuthorizeTransactionActivity extends AppCompatActivity {
                     .setCurrency(Currency.getInstance(currencyString))
                     .setInvoiceReference("1")
                     .setMerchantReference("MREF-123")
-                    .setTransactionProcessingBehavior(
-                            shouldReserve.isChecked() ? TransactionProcessingBehavior.RESERVE : TransactionProcessingBehavior.COMPLETE_IMMEDIATELY
-                    )
-                    .setGeneratePanToken(generatePanToken.isChecked() ? true : false);
+                    .setTransactionProcessingBehavior(shouldReserve.isChecked() ? TransactionProcessingBehavior.RESERVE : TransactionProcessingBehavior.COMPLETE_IMMEDIATELY)
+                    .setGeneratePanToken(generatePanToken.isChecked());
+
             if (!customTextString.isEmpty()) {
                 transactionBuilder.setCustomText(customTextString);
             }
@@ -117,12 +116,14 @@ public class AuthorizeTransactionActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_item,
                 languages);
 
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);;
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+
         languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 languageCode = languages.get(position).getCode();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -137,4 +138,9 @@ public class AuthorizeTransactionActivity extends AppCompatActivity {
         super.onDestroy();
         client.unbind(this);
     }
+
+    private boolean areAllFieldsValid(@NonNull String amount, String currency) {
+        return amount.isEmpty() || currency.matches(CURRENCY_REGEX);
+    }
+
 }
