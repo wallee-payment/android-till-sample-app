@@ -8,6 +8,7 @@ import android.provider.Settings;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.wallee.android.till.sdk.TillLog;
+import com.wallee.android.till.sdk.Utils;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -57,10 +58,14 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, PinpadInformationActivity.class));
 
         });
+
+        findViewById(R.id.settings).setOnClickListener(v -> {
+            Utils.openSettings(this);
+        });
+
         findViewById(R.id.exit).setOnClickListener(v -> {
             finish();
         });
-
 
         // init & bind
         TillLog.getInstance().bind(this);
