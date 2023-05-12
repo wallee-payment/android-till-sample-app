@@ -36,8 +36,11 @@ public class PinpadInformationResponseActivity extends AppCompatActivity {
                 "resultCode code - " + result.getResultCode().getCode() + "\n" +
                 "resultCode description - " + result.getResultCode().getDescription() + "\n"+
                 "Terminal Id - "+ result.getTerminalId() + "\n" +
-                "Serial Number - "+ result.getSerialNumber() + "\n"
-               ;
+                "Serial Number - "+ result.getSerialNumber() + "\n" +
+                "Merchant ID - "+ result.getMerchantId() + "\n"+
+                "Merchant Name - "+ result.getMerchantName() +"\n"+
+                "Space ID - "+ result.getSpaceID() +"\n"
+                ;
     }
 
 }
