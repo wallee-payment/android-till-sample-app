@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.wallee.android.till.sample.till.model.ErrorCode;
 import com.wallee.android.till.sdk.Utils;
 import com.wallee.android.till.sdk.data.TransactionVoidResponse;
 
@@ -19,6 +20,10 @@ public class TransactionVoidResponseActivity extends AppCompatActivity {
         TransactionVoidResponse response = Utils.getTransactionVoidResponse(getIntent().getExtras());
 
         if (response != null) {
+            if (response.getResultCode().getCode().equals(ErrorCode.ERR_CONNECTION_FAILED.getCode())) {
+                com.wallee.android.till.sample.till.Utils.showToast(this,getResources().getString(R.string.app_relaunch));
+                Utils.handleFailedToConnectVpj(this);
+            }
             TextView textViewResult = findViewById(R.id.textViewResult);
             textViewResult.setText(responseToString(response));
         }

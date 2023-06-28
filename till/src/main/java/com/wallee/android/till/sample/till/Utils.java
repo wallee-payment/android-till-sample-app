@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 public class Utils {
 
@@ -13,5 +14,10 @@ public class Utils {
             InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
+    }
+
+    public static void showToast(Activity activity,String message) {
+        Toast toast=Toast.makeText(activity,message,Toast.LENGTH_SHORT);
+         toast.show();
     }
 }
