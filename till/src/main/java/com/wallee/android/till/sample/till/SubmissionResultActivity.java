@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.wallee.android.till.sample.till.model.ErrorCode;
 import com.wallee.android.till.sdk.Utils;
 import com.wallee.android.till.sdk.data.SubmissionResult;
 
@@ -19,6 +20,10 @@ public class SubmissionResultActivity extends AppCompatActivity {
         SubmissionResult result = Utils.getSubmissionResult(getIntent().getExtras());
 
         if (result != null) {
+            if (result.getResultCode().getCode().equals(ErrorCode.ERR_CONNECTION_FAILED.getCode())) {
+                com.wallee.android.till.sample.till.Utils.showToast(this,getResources().getString(R.string.app_relaunch));
+                Utils.handleFailedToConnectVpj(this);
+            }
             TextView textViewResult = findViewById(R.id.textViewResult);
             textViewResult.setText(resultToString(result));
         }

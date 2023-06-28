@@ -2,10 +2,12 @@ package com.wallee.android.till.sample.till;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.wallee.android.till.sample.till.model.ErrorCode;
 import com.wallee.android.till.sdk.TillLog;
 import com.wallee.android.till.sdk.Utils;
 import com.wallee.android.till.sdk.data.TransactionResponse;
@@ -23,6 +25,10 @@ public class TransactionResponseActivity extends AppCompatActivity {
 
 
         if (response != null) {
+            if (response.getResultCode().getCode().equals(ErrorCode.ERR_CONNECTION_FAILED.getCode())) {
+                com.wallee.android.till.sample.till.Utils.showToast(this,getResources().getString(R.string.app_relaunch));
+                Utils.handleFailedToConnectVpj(this);
+            }
             TextView textViewResult = findViewById(R.id.textViewResult);
             textViewResult.setText(responseToString(response));
         }

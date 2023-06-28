@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Till Sample</string>
+    <string name="app_relaunch">App Relaunching, just wait 10 seconds for transactions</string>
 </resources>
