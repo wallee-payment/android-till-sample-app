@@ -17,6 +17,7 @@ import com.wallee.android.till.sdk.data.TransactionProcessingBehavior;
 import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class ProcessPaymentLinkActivity extends AppCompatActivity {
     private ApiClient client;
@@ -34,8 +35,7 @@ public class ProcessPaymentLinkActivity extends AppCompatActivity {
         }
 
         findViewById(R.id.exitButton).setOnClickListener(view -> {
-            MainActivity app = (MainActivity) getApplicationContext();
-            app.finish();
+            finish();
         });
     }
 
@@ -56,27 +56,32 @@ public class ProcessPaymentLinkActivity extends AppCompatActivity {
         Intent appLinkIntent = getIntent();
         Uri appLinkData = appLinkIntent.getData();
         if (appLinkData != null) {
+            Log.d(TAG, "Link received: " + appLinkData);
 
             String type = appLinkData.getQueryParameter("type");
             String amount = appLinkData.getQueryParameter("amount");
             String currency = appLinkData.getQueryParameter("currency");
-            String callbackScheme = appLinkData.getQueryParameter("callbackscheme");
-            String callbackHost = appLinkData.getQueryParameter("callbackhost");
+            String successCallbackScheme = appLinkData.getQueryParameter("callbackSuccess");
+            String failureCallbackScheme = appLinkData.getQueryParameter("callbackFail");
+            String receiptId = appLinkData.getQueryParameter("receiptId");
 
             Log.d(TAG, "processing PaymentLink transaction data: ");
             Log.d(TAG, "type = " + type);
             Log.d(TAG, "amount = " + amount);
             Log.d(TAG, "currency = " + currency);
-            Log.d(TAG, "callbackScheme = " + callbackScheme);
-            Log.d(TAG, "callbackHost = " + callbackHost);
+            Log.d(TAG, "callbackSuccess = " + successCallbackScheme);
+            Log.d(TAG, "callbackFail = " + failureCallbackScheme);
+            Log.d(TAG, "receiptId = " + receiptId);
 
-            if (type == null || amount == null || currency == null || callbackScheme == null) {
+            if (type == null || amount == null || currency == null || successCallbackScheme == null || failureCallbackScheme == null) {
                 Log.e(TAG, "params missing for the payment link");
                 this.showError("Params missing for the payment link. Check log and the link");
                 return;
             }
             PaymentLinkData app = (PaymentLinkData) getApplicationContext();
-            app.setPaymentLinkClientDestination((callbackHost!=null)?callbackScheme+"://"+callbackHost : callbackScheme);
+            app.setPaymentLinkClientSuccess(successCallbackScheme);
+            app.setPaymentLinkClientFailure(failureCallbackScheme);
+            app.setPaymentLinkClientReceiptId(receiptId);
             startTransaction(type, amount, currency);
         } else {
             Log.e(TAG, "appLinkData absent");
@@ -104,7 +109,11 @@ public class ProcessPaymentLinkActivity extends AppCompatActivity {
         Log.d(TAG, "ApiClient is bound for transaction");
 
         try {
-            client.authorizeTransaction(transaction);
+            if (type.equals("1")) {
+                client.authorizeTransaction(transaction);
+            } else {
+                this.showError("Wrong Transaction type set. Type: " + type);
+            }
         } catch (Exception e){
             e.printStackTrace();
             this.showError("Failed to connect to VSD. Is app installed ?");
@@ -118,6 +127,7 @@ public class ProcessPaymentLinkActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        Log.d(TAG, "onDestroy");
         super.onDestroy();
         client.unbind(this);
     }

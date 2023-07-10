@@ -25,13 +25,13 @@ public class TransactionResponseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.transaction_response_activity);
         TransactionResponse response = Utils.getTransactionResponse(getIntent().getExtras());
-        TillLog.debug("Log transaction response  -> " + responseToString(response));
 
         if (response != null) {
-            sendPaymentLinkResponse(response.getResultCode().getCode());
+            TillLog.debug("Log transaction response  -> " + responseToString(response));
+            sendPaymentLinkResponse(response.getResultCode().getCode(), response.getSequenceCount());
         } else {
             Log.e(TAG, "response should not be null");
-            sendPaymentLinkResponse("-1");
+            sendPaymentLinkResponse("-1", -1L);
         }
 
         findViewById(R.id.exitButton).setOnClickListener(view -> {
@@ -45,12 +45,20 @@ public class TransactionResponseActivity extends AppCompatActivity {
         textViewResult.setText(message);
     }
 
-    private void sendPaymentLinkResponse(String resultCode) {
+    private void sendPaymentLinkResponse(String resultCode, Long transactionId) {
         Log.d(TAG, "sendPaymentLinkResponse called @ resultCode = " + resultCode);
-        String status = (resultCode.equals("0") ? "0" : "-1");
+        int status = (resultCode.equals("0") ? 0 : -1);
 
         PaymentLinkData app = (PaymentLinkData) getApplicationContext();
-        String destination = app.getPaymentLinkClientDestination();
+        String destination;
+        String receiptId = app.getPaymentLinkClientReceiptId();
+
+        if (status == 0) {
+            destination = app.getPaymentLinkClientSuccess();
+        } else {
+            destination = app.getPaymentLinkClientFailure();
+        }
+
 
         if (destination == null) {
             Log.e(TAG, "failed to get PaymentLink app destination");
@@ -58,8 +66,11 @@ public class TransactionResponseActivity extends AppCompatActivity {
             return;
         }
 
-        destination += "/?status=" + status;
+        destination += "&receiptId=" + receiptId +
+                "&transactionId=" + transactionId;
+
         Uri uri = Uri.parse(destination);
+        Log.d(TAG, "Send response: " + uri);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, uri);
 
         //Verify if paymentlinkclientapp has this screen path
