@@ -1,6 +1,8 @@
 package com.wallee.android.till.sample.till
 
 import android.os.Bundle
+import android.os.SystemClock
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.AdapterView
@@ -31,6 +33,7 @@ class AuthorizeTransactionActivity : AppCompatActivity() {
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
+    private var lastClickTime: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -125,7 +128,14 @@ class AuthorizeTransactionActivity : AppCompatActivity() {
             selectLanguage.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
                 languageSpinner.setVisibleOrGone(isChecked)
             }
-            authorizeButton.setOnClickListener { authorizeTransaction() }
+            authorizeButton.setOnClickListener {
+                // preventing double, using threshold of 1000 ms
+                if (SystemClock.elapsedRealtime() - lastClickTime < 1000){
+                    return@setOnClickListener
+                }
+                lastClickTime = SystemClock.elapsedRealtime();
+                authorizeTransaction()
+            }
             returnButton.setOnClickListener { finish() }
             authorizeTransactionParent.setOnClickListener {
                 Utils.hideKeyboardFrom(this@AuthorizeTransactionActivity)
