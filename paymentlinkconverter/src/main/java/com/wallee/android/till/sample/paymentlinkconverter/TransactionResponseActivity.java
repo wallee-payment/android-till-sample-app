@@ -31,7 +31,7 @@ public class TransactionResponseActivity extends AppCompatActivity {
             sendPaymentLinkResponse(response.getResultCode().getCode(), response.getSequenceCount());
         } else {
             Log.e(TAG, "response should not be null");
-            sendPaymentLinkResponse("-1", -1L);
+            sendPaymentLinkResponse("-1", "-1");
         }
 
         findViewById(R.id.exitButton).setOnClickListener(view -> {
@@ -45,7 +45,7 @@ public class TransactionResponseActivity extends AppCompatActivity {
         textViewResult.setText(message);
     }
 
-    private void sendPaymentLinkResponse(String resultCode, Long transactionId) {
+    private void sendPaymentLinkResponse(String resultCode, String transactionId) {
         Log.d(TAG, "sendPaymentLinkResponse called @ resultCode = " + resultCode);
         int status = (resultCode.equals("0") ? 0 : -1);
 
