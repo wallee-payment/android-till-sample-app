@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Till Sample</string>
     <string name="app_relaunch">App Relaunching, just wait 10 seconds for transactions</string>
+    <string name="credit_info_tv">To start credit transactions the value has to be negative.\n\nExample: -10.00</string>
 </resources>

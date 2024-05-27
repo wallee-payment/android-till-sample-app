@@ -1,10 +1,6 @@
 package com.wallee.android.till.sample.till.common
 
 import com.wallee.android.till.sample.till.model.Currency
-
-/**
- * Move under domain layer when refactoring to clean architecture
- */
 class GetAllCurrenciesUseCase {
 
     private val currenciesList = listOf(
@@ -22,5 +18,4 @@ class GetAllCurrenciesUseCase {
     )
 
     fun execute() = currenciesList
-
 }

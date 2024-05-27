@@ -30,7 +30,7 @@
         <activity android:name=".AuthorizeTransactionActivity" />
         <activity android:name=".TransactionResponseActivity" />
         <activity android:name=".CancelLastTransactionOperationActivity" />
-        <activity android:name=".CancelationResultActivity" />
+        <activity android:name=".CancellationResultActivity" />
         <activity android:name=".CompleteTransactionActivity" />
         <activity android:name=".TransactionCompletionResponseActivity" />
         <activity android:name=".VoidTransactionActivity" />

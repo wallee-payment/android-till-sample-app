@@ -45,7 +45,7 @@ class MockResponseHandler extends ResponseHandler {
 
     @Override
     public void cancelLastTransactionOperationReply(CancelationResult cancelationResult) {
-        Intent intent = new Intent(context, CancelationResultActivity.class);
+        Intent intent = new Intent(context, CancellationResultActivity.class);
         intent.putExtras(Utils.toBundle(cancelationResult));
         context.startActivity(intent);
     }
