@@ -134,5 +134,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/generatePanToken" />
 
+
+        <TextView
+            android:id="@+id/tvInfo"
+            android:layout_margin="20dp"
+            android:textSize="13sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold|italic"
+            android:text="@string/credit_info_tv"
+            android:gravity="start"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/returnButton" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

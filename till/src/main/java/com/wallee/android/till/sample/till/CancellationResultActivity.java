@@ -10,7 +10,7 @@ import com.wallee.android.till.sample.till.model.ErrorCode;
 import com.wallee.android.till.sdk.Utils;
 import com.wallee.android.till.sdk.data.CancelationResult;
 
-public class CancelationResultActivity extends AppCompatActivity {
+public class CancellationResultActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
