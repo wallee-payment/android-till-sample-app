@@ -14,69 +14,69 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Check Api Service Compatibility" />
+            android:text="@string/check_api_service_compatibility" />
 
         <Button
             android:id="@+id/authorizeTransaction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Authorize Transaction" />
+            android:text="@string/authorize_transaction" />
 
         <Button
             android:id="@+id/cancelLastTransactionOperation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Cancel Last Transaction Operation" />
+            android:text="@string/cancel_last_transaction_operation" />
 
         <Button
             android:id="@+id/completeTransaction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Complete Transaction" />
+            android:text="@string/complete_transaction" />
 
         <Button
             android:id="@+id/voidTransaction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Void Transaction" />
+            android:text="@string/void_transaction" />
 
         <Button
             android:id="@+id/executeTransmission"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Execute Transmission" />
+            android:text="@string/execute_transmission" />
 
         <Button
             android:id="@+id/executeSubmission"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Execute Submission" />
+            android:text="@string/execute_submission" />
 
         <Button
             android:id="@+id/executeFinalBalance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Execute Final Balance" />
+            android:text="@string/execute_final_balance" />
 
         <Button
             android:id="@+id/generatePanTokenReq"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="GENERATE PAN TOKEN" />
+            android:text="@string/generate_pan_token" />
         <Button
             android:id="@+id/getConfigInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="GET CONFIG INFO" />
+            android:text="@string/get_config_info" />
 
 
         <Button
@@ -84,14 +84,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Settings"/>
+            android:text="@string/settings"/>
+
+        <Button
+            android:id="@+id/config"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/config"/>
+
+        <Button
+            android:id="@+id/init"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/init"/>
 
         <Button
             android:id="@+id/exit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Exit" />
+            android:text="@string/exit" />
 
     </LinearLayout>
 </ScrollView>

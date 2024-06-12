@@ -59,6 +59,14 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        findViewById(R.id.config).setOnClickListener(v -> {
+            startActivity(new Intent(this, ExecuteConfigurationActivity.class));
+        });
+
+        findViewById(R.id.init).setOnClickListener(v -> {
+            startActivity(new Intent(this, ExecuteInitialisationActivity.class));
+        });
+
         findViewById(R.id.settings).setOnClickListener(v -> {
             Utils.openSettings(this);
         });

@@ -6,9 +6,11 @@ import android.content.Intent;
 import com.wallee.android.till.sdk.ResponseHandler;
 import com.wallee.android.till.sdk.Utils;
 import com.wallee.android.till.sdk.data.CancelationResult;
+import com.wallee.android.till.sdk.data.ConfigurationResult;
 import com.wallee.android.till.sdk.data.FinalBalanceResult;
 import com.wallee.android.till.sdk.data.GeneratePanTokenResponse;
 import com.wallee.android.till.sdk.data.GetPinpadInformationResponse;
+import com.wallee.android.till.sdk.data.InitialisationResult;
 import com.wallee.android.till.sdk.data.SubmissionResult;
 import com.wallee.android.till.sdk.data.TransactionCompletionResponse;
 import com.wallee.android.till.sdk.data.TransactionResponse;
@@ -82,6 +84,20 @@ class MockResponseHandler extends ResponseHandler {
     public void executeGetConfigInfoResponse(GetPinpadInformationResponse configInfoResponse ) {
         Intent intent = new Intent(context, PinpadInformationResponseActivity.class);
         intent.putExtras(Utils.toBundle(configInfoResponse));
+        context.startActivity(intent);
+    }
+
+    @Override
+    public void executeConfigurationReply(ConfigurationResult result) {
+        Intent intent = new Intent(context, ConfigurationResultActivity.class);
+        intent.putExtras(Utils.toBundle(result));
+        context.startActivity(intent);
+    }
+
+    @Override
+    public void executeInitialisationReply(InitialisationResult result) {
+        Intent intent = new Intent(context, InitialisationResultActivity.class);
+        intent.putExtras(Utils.toBundle(result));
         context.startActivity(intent);
     }
 }
