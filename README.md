@@ -29,6 +29,8 @@ For each **Android Till Interface SDK** request we provide an activity where we 
 - ExecuteFinalBalanceActivity: Provides example how to perform final balance.
 - GeneratePanTokenActivity: Provides example how to generate card PAN token.
 - PinpadInformationActivity: Provides example how to get pinpad information (terminal ID, device serial number, space ID, merchant ID, and name).
+- ExecuteConfigurationActivity: Provides example how to perform a configuration.
+- ExecuteInitialisationActivity: Provides example how to perform a initialisation.
 
 ### Handle Response
 - MockResponseHandler: Provide a example of how to handle response for all Wallee Android Till SDK requests.
@@ -41,6 +43,8 @@ For each **Android Till Interface SDK** request we provide an activity where we 
 - FinalBalanceResultActivity: Display Final Balance Result.
 - GeneratePanTokenResponseActivity: Display Generate Pan Token Result.
 - PinpadInformationResponseActivity: Display Pinpad Information Result.
+- ConfigurationResultActivity: Display Configuration Result.
+- InitialisationResultActivity: Display Initialisation Result.
 
 ### How to use
 

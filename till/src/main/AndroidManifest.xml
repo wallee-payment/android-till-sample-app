@@ -42,7 +42,12 @@
         <activity android:name=".ExecuteFinalBalanceActivity" />
         <activity android:name=".FinalBalanceResultActivity" />
         <activity android:name=".GeneratePanTokenActivity" />
-        <activity android:name=".GeneratePanTokenResponseActivity" />
+        <activity android:name=".GeneratePanTokenResponseActivity"/>
+        <activity android:name=".ExecuteConfigurationActivity"/>
+        <activity android:name=".ExecuteInitialisationActivity"/>
+        <activity android:name=".ConfigurationResultActivity"/>
+        <activity android:name=".InitialisationResultActivity"/>
+
         <activity
             android:name=".PinpadInformationResponseActivity"
             android:exported="false" />

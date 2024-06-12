@@ -2,4 +2,26 @@
     <string name="app_name">Till Sample</string>
     <string name="app_relaunch">App Relaunching, just wait 10 seconds for transactions</string>
     <string name="credit_info_tv">To start credit transactions the value has to be negative.\n\nExample: -10.00</string>
+    <string name="config">Configuration</string>
+    <string name="init">Initialisation</string>
+    <string name="settings">Settings</string>
+    <string name="generate_pan_token">GENERATE PAN TOKEN</string>
+    <string name="execute_final_balance">Execute Final Balance</string>
+    <string name="get_config_info">PinPad info</string>
+    <string name="execute_submission">Execute Submission</string>
+    <string name="execute_transmission">Execute Transmission</string>
+    <string name="void_transaction">Void Transaction</string>
+    <string name="complete_transaction">Complete Transaction</string>
+    <string name="cancel_last_transaction_operation">Cancel Last Transaction Operation</string>
+    <string name="authorize_transaction">Authorize Transaction</string>
+    <string name="check_api_service_compatibility">Check Api Service Compatibility</string>
+    <string name="exit">Exit</string>
+    <string name="return_value">Return</string>
+    <string name="execute_configuration">Execute Configuration</string>
+    <string name="execute">Execute</string>
+    <string name="execute_initialisation">Execute Initialisation</string>
+    <string name="initialisation_result">Initialisation Result</string>
+    <string name="ok">OK</string>
+    <string name="configuration_result">Configuration Result</string>
+    <string name="pinpad_information">Pinpad Information</string>
 </resources>
