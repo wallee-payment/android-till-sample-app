@@ -18,7 +18,7 @@ A simple example of a **Android Till Interface SDK** implementation that makes u
 For each **Android Till Interface SDK** request we provide an activity where we have an example of how to implement the sdk requests.
 
 ### Activities
-- MainActivity: Provides example of how to send logs, open settings in wallee app and request required Android 10 permissions.
+- MainActivity: Provides example of how to send logs, invoke settings in wallee app, enable and disable navigation bar and request required Android 10 permissions.
 - CheckApiServiceCompatibilityActivity: Verify Wallee Android Till SDK compatibility.
 - AuthorizeTransactionActivity: Provides example of how to perform purchase, credit, reservation transactions, generate pan token and choose transactions language.
 - CompleteTransactionActivity: Provides example how to complete reservation.

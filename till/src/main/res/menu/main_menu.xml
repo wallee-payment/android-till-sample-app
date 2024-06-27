@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+        <item
+            android:id="@+id/action_enable_system_bar"
+            android:title="@string/enable_system_bar"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/action_disable_system_bar"
+            android:title="@string/disable_system_bar"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/action_wallee_settings"
+            android:title="@string/wallee_settings"
+            android:icon="@drawable/ic_wallee_settings"
+            app:showAsAction="never" />
+</menu>
