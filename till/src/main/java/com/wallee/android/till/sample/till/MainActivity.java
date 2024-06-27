@@ -1,18 +1,24 @@
 package com.wallee.android.till.sample.till;
 
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.wallee.android.till.sdk.TillLog;
 import com.wallee.android.till.sdk.Utils;
 
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,10 +73,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, ExecuteInitialisationActivity.class));
         });
 
-        findViewById(R.id.settings).setOnClickListener(v -> {
-            Utils.openSettings(this);
-        });
-
         findViewById(R.id.exit).setOnClickListener(v -> {
             finish();
         });
@@ -87,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
     // Android 10 needs overlay permission to get transaction response
     private void requestOverlayPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -97,8 +98,43 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, 0);
             }
         }
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
 
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_enable_system_bar:
+                enableSystemBar();
+                return true;
+            case R.id.action_disable_system_bar:
+                disableSystemBar();
+                return true;
+            case R.id.action_wallee_settings:
+                walleeSettingsMenu();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void enableSystemBar() {
+        Utils.enableSystemBar(this);
+    }
+
+    private void disableSystemBar() {
+        Utils.disableSystemBar(this);
+    }
+
+    private void walleeSettingsMenu() {
+        Utils.openSettings(this);
     }
 
     @Override
