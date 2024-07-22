@@ -19,6 +19,7 @@ import com.wallee.android.till.sdk.Utils;
 
 
 public class MainActivity extends AppCompatActivity {
+    private boolean isSystemBarEnabled = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,18 +85,28 @@ public class MainActivity extends AppCompatActivity {
         TillLog.error("VSD Test Error");
         TillLog.warning("VSD Test Warning");
         TillLog.lAssert("VSD Send Assert");
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
         requestOverlayPermission();
-
     }
 
     // Android 10 needs overlay permission to get transaction response
     private void requestOverlayPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             if (!Settings.canDrawOverlays(this)) {
+                this.enableSystemBar();
+                this.isSystemBarEnabled = true;
                 Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                         Uri.parse("package:" + getPackageName()));
                 startActivityForResult(intent, 0);
+            } else {
+                if (this.isSystemBarEnabled){
+                    this.disableSystemBar();
+                    this.isSystemBarEnabled = false;
+                }
             }
         }
     }
@@ -112,13 +123,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_enable_system_bar:
-                enableSystemBar();
+                this.enableSystemBar();
                 return true;
             case R.id.action_disable_system_bar:
-                disableSystemBar();
+                this.disableSystemBar();
                 return true;
             case R.id.action_wallee_settings:
-                walleeSettingsMenu();
+                this.walleeSettingsMenu();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
