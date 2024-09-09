@@ -56,7 +56,9 @@ public class TransactionResponseActivity extends AppCompatActivity {
                 "cardAppId - " + response.getCardAppId() + "\n" +
                 "amountTip - " + response.getAmountTip() + "\n" +
                 "panToken - " + response.getPanToken() + "\n" +
-                "merchantReference - " + response.getMerchantReference();
+                "merchantReference - " + response.getMerchantReference() + "\n" +
+                "transactionSyncNumber - " + response.getTransactionSyncNumber() + "\n" +
+                "paymentEntryMethod - " + response.getPaymentEntryMethod();
 
     }
 }

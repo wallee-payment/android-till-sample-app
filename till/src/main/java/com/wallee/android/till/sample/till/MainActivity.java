@@ -66,6 +66,10 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        findViewById(R.id.getTerminalConfigData).setOnClickListener(v -> startActivity(
+                new Intent(this, TerminalConfigurationDataActivity.class))
+        );
+
         findViewById(R.id.config).setOnClickListener(v -> {
             startActivity(new Intent(this, ExecuteConfigurationActivity.class));
         });
@@ -131,9 +135,19 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_wallee_settings:
                 this.walleeSettingsMenu();
                 return true;
+            case R.id.action_service_transaction:
+                this.startTransactionFromService();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void startTransactionFromService() {
+        Intent intent = new Intent(this, ServiceTransaction.class);
+        intent.putExtra("amount", "15.00");
+        intent.putExtra("currency", "EUR");
+        startService(intent);
     }
 
     private void enableSystemBar() {

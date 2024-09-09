@@ -3,6 +3,7 @@
     <string name="app_relaunch">App Relaunching, just wait 10 seconds for transactions</string>
     <string name="credit_info_tv">To start credit transactions the value has to be negative.\n\nExample: -10.00</string>
     <string name="wallee_settings">Wallee Settings Menu</string>
+    <string name="service_transaction">Start Service Transaction</string>
     <string name="open">open</string>
     <string name="config">Configuration</string>
     <string name="init">Initialisation</string>
@@ -28,4 +29,8 @@
     <string name="pinpad_information">Pinpad Information</string>
     <string name="enable_system_bar">Enable System Bar</string>
     <string name="disable_system_bar">Disable System Bar</string>
+    <string name="reservation_adjustment">Reservation Adjustment</string>
+    <string name="terminal_configuration_data">Configuration Data</string>
+    <string name="terminal_config_data">TERMINAL CONFIG DATA</string>
+    <string name="configuration_data">CONFIGURATION DATA</string>
 </resources>
