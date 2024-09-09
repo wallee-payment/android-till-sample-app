@@ -15,4 +15,10 @@
             android:title="@string/wallee_settings"
             android:icon="@drawable/ic_wallee_settings"
             app:showAsAction="never" />
+
+        <item
+            android:id="@+id/action_service_transaction"
+            android:title="@string/service_transaction"
+            android:icon="@drawable/ic_wallee_settings"
+            app:showAsAction="never" />
 </menu>

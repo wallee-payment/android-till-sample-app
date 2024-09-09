@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.wallee.android.till.sample.till.common.GetAllCurrenciesUseCase;
 import com.wallee.android.till.sample.till.databinding.AuthorizeTransactionActivityBinding;
+import com.wallee.android.till.sample.till.databinding.TransactionCompletionResponseActivityBinding;
 import com.wallee.android.till.sample.till.model.Language;
 import com.wallee.android.till.sample.till.model.Languages;
 import com.wallee.android.till.sdk.ApiClient;
@@ -49,12 +50,26 @@ public class AuthorizeTransactionActivity extends AppCompatActivity {
         String amountString = getTextAsString(binding.editTextAmount);
         String currencyString = binding.currencySpinner.getSelectedItem().toString();
         String customTextString = getTextAsString(binding.editTextCustomText);
+        String transactionRefNumber = getTextAsString(binding.editTextTransactionRef);
 
         // For credit transactions the value has to be negative Ex: -10.00
 
-        if (amountString.isEmpty()) {
+        if(binding.shouldReserve.isChecked() && binding.shouldAdjustReservation.isChecked()) {
+            Toast.makeText(this, "Choose one: Reservation or Reservation adjustment", Toast.LENGTH_LONG).show();
+        } else if (amountString.isEmpty()) {
             Toast.makeText(this, "Amount field is empty", Toast.LENGTH_LONG).show();
+        } if (binding.shouldAdjustReservation.isChecked() && transactionRefNumber.isEmpty()){
+            Toast.makeText(this, "Reserve reference field is empty", Toast.LENGTH_LONG).show();
         } else {
+            TransactionProcessingBehavior behavior;
+            if(binding.shouldReserve.isChecked()){
+                behavior = TransactionProcessingBehavior.RESERVE;
+            } else if(binding.shouldAdjustReservation.isChecked()){
+                behavior = TransactionProcessingBehavior.ADJUST_RESERVATION;
+            } else {
+                behavior = TransactionProcessingBehavior.COMPLETE_IMMEDIATELY;
+            }
+
             List<LineItem> lineItems = new LineItem.ListBuilder("foo", new BigDecimal(amountString))
                     .getCurrent()
                     .setName("bar")
@@ -66,14 +81,16 @@ public class AuthorizeTransactionActivity extends AppCompatActivity {
                     .setCurrency(Currency.getInstance(currencyString))
                     .setInvoiceReference("1")
                     .setMerchantReference("MREF-123")
-                    .setTransactionProcessingBehavior(binding.shouldReserve.isChecked() ?
-                            TransactionProcessingBehavior.RESERVE : TransactionProcessingBehavior.COMPLETE_IMMEDIATELY)
+                    .setTransactionProcessingBehavior(behavior)
                     .setGeneratePanToken(binding.generatePanToken.isChecked());
             if (!customTextString.isEmpty()) {
                 transactionBuilder.setCustomText(customTextString);
             }
             if (binding.selectLanguage.isChecked()) {
                 transactionBuilder.setLanguage(languageCode);
+            }
+            if(binding.shouldAdjustReservation.isChecked()) {
+                transactionBuilder.setTransactionRefNumber(transactionRefNumber);
             }
             transaction = transactionBuilder.build();
             TillLog.debug("VSD Start Transaction of amount  -> " + amountString);
@@ -127,6 +144,7 @@ public class AuthorizeTransactionActivity extends AppCompatActivity {
         binding.returnButton.setOnClickListener(v -> finish());
 
         binding.authorizeTransactionParent.setOnClickListener(v -> hideKeyboardFrom(AuthorizeTransactionActivity.this));
+        binding.shouldAdjustReservation.setOnCheckedChangeListener((buttonView, isChecked) -> setVisibleOrGone(binding.editTextTransactionRef, isChecked));
     }
 
     @Override
