@@ -79,14 +79,6 @@
             android:text="@string/get_config_info" />
 
         <Button
-            android:id="@+id/getTerminalConfigData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/terminal_config_data" />
-
-
-        <Button
             android:id="@+id/config"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -99,6 +91,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/init"/>
+
+        <Button
+            android:id="@+id/getTerminalConfigData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/configuration_data" />
 
         <Button
             android:id="@+id/exit"
