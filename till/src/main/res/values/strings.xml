@@ -31,6 +31,7 @@
     <string name="disable_system_bar">Disable System Bar</string>
     <string name="reservation_adjustment">Reservation Adjustment</string>
     <string name="terminal_configuration_data">Configuration Data</string>
-    <string name="terminal_config_data">TERMINAL CONFIG DATA</string>
-    <string name="configuration_data">CONFIGURATION DATA</string>
+    <string name="execute_configuration_data">Execute Configuration Data</string>
+    <string name="configuration_data">Configuration Data</string>
+    <string name="configuration_data_response">Configuration Data Response</string>
 </resources>
