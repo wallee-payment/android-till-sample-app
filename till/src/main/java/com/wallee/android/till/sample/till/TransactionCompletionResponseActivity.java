@@ -46,6 +46,7 @@ public class TransactionCompletionResponseActivity extends AppCompatActivity {
                 "terminalId - " + response.getTerminalId() + "\n" +
                 "sequenceCount - " + response.getSequenceCount() + "\n" +
                 "transactionTime - " + response.getTransactionTime() + "\n" +
+                "transactionSyncNumber - " + response.getTransactionSyncNumber() + "\n" +
                 "receipts - " + response.getReceipts();
     }
 }
