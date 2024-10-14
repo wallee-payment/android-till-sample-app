@@ -154,6 +154,7 @@
             android:hint="Reserve reference"
             android:inputType="numberDecimal"
             android:visibility="gone"
+            android:maxLength="16"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/shouldAdjustReservation" />
 
