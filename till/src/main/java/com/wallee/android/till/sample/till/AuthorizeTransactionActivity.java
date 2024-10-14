@@ -61,6 +61,8 @@ public class AuthorizeTransactionActivity extends AppCompatActivity {
         } if (binding.shouldAdjustReservation.isChecked() && transactionRefNumber.isEmpty()){
             Toast.makeText(this, "Reserve reference field is empty", Toast.LENGTH_LONG).show();
         } else {
+            hideKeyboardFrom(AuthorizeTransactionActivity.this);
+
             TransactionProcessingBehavior behavior;
             if(binding.shouldReserve.isChecked()){
                 behavior = TransactionProcessingBehavior.RESERVE;

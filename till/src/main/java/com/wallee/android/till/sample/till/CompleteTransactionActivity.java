@@ -1,5 +1,7 @@
 package com.wallee.android.till.sample.till;
 
+import static com.wallee.android.till.sample.till.Utils.hideKeyboardFrom;
+
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -27,6 +29,8 @@ public class CompleteTransactionActivity extends AppCompatActivity {
         final EditText editTextReference = findViewById(R.id.editTextReference);
 
         findViewById(R.id.completeButton).setOnClickListener(view -> {
+            hideKeyboardFrom(CompleteTransactionActivity.this);
+            
             String amountString = amountField.getText().toString();
             String currencyString = editTextCurrency.getText().toString();
             String referenceString = editTextReference.getText().toString();
