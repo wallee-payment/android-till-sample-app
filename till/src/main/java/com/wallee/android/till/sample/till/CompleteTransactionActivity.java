@@ -2,6 +2,7 @@ package com.wallee.android.till.sample.till;
 
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,21 +31,25 @@ public class CompleteTransactionActivity extends AppCompatActivity {
             String currencyString = editTextCurrency.getText().toString();
             String referenceString = editTextReference.getText().toString();
 
-            List<LineItem> lineItems = new LineItem.ListBuilder("foo", new BigDecimal(amountString))
-                    .getCurrent()
-                    .setName("bar")
-                    .getListBuilder()
-                    .build();
+            if(referenceString.isEmpty()){
+                Toast.makeText(this, "Reference field must not be empty", Toast.LENGTH_SHORT).show();
+            } else {
+                List<LineItem> lineItems = new LineItem.ListBuilder("foo", new BigDecimal(amountString))
+                        .getCurrent()
+                        .setName("bar")
+                        .getListBuilder()
+                        .build();
 
-            TransactionCompletion transaction = new TransactionCompletion.Builder(lineItems)
-                    .setCurrency(Currency.getInstance(currencyString))
-                    .setReserveReference(referenceString)
-                    .build();
+                TransactionCompletion transaction = new TransactionCompletion.Builder(lineItems)
+                        .setCurrency(Currency.getInstance(currencyString))
+                        .setReserveReference(referenceString)
+                        .build();
 
-            try {
-                client.completeTransaction(transaction);
-            } catch (Exception e) {
-                e.printStackTrace();
+                try {
+                    client.completeTransaction(transaction);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
