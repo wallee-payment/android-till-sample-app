@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.wallee.android.till.sample.till.common.GetAllCurrenciesUseCase;
 import com.wallee.android.till.sample.till.databinding.AuthorizeTransactionActivityBinding;
-import com.wallee.android.till.sample.till.databinding.TransactionCompletionResponseActivityBinding;
 import com.wallee.android.till.sample.till.model.Language;
 import com.wallee.android.till.sample.till.model.Languages;
 import com.wallee.android.till.sdk.ApiClient;
@@ -58,7 +57,7 @@ public class AuthorizeTransactionActivity extends AppCompatActivity {
             Toast.makeText(this, "Choose one: Reservation or Reservation adjustment", Toast.LENGTH_LONG).show();
         } else if (amountString.isEmpty()) {
             Toast.makeText(this, "Amount field is empty", Toast.LENGTH_LONG).show();
-        } if (binding.shouldAdjustReservation.isChecked() && transactionRefNumber.isEmpty()){
+        } else if (binding.shouldAdjustReservation.isChecked() && transactionRefNumber.isEmpty()){
             Toast.makeText(this, "Reserve reference field is empty", Toast.LENGTH_LONG).show();
         } else {
             hideKeyboardFrom(AuthorizeTransactionActivity.this);
