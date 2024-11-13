@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.wallee.android.till.sample.till">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -13,11 +12,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".DeepLinkActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DeepLinkResponse"
+            android:exported="true">
+            <intent-filter android:label="WalleeDeepLink">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="v1"
+                    android:scheme="till" />
+            </intent-filter>
+        </activity>
 
         <service
             android:name=".ServiceTransaction"
             android:enabled="true"
-            android:exported="true"/>
+            android:exported="true" />
 
         <activity
             android:name=".MainActivity"
@@ -47,14 +63,13 @@
         <activity android:name=".ExecuteFinalBalanceActivity" />
         <activity android:name=".FinalBalanceResultActivity" />
         <activity android:name=".GeneratePanTokenActivity" />
-        <activity android:name=".GeneratePanTokenResponseActivity"/>
-        <activity android:name=".ExecuteConfigurationActivity"/>
-        <activity android:name=".ExecuteInitialisationActivity"/>
-        <activity android:name=".ConfigurationResultActivity"/>
-        <activity android:name=".InitialisationResultActivity"/>
-        <activity android:name=".TerminalConfigurationDataActivity"/>
-        <activity android:name=".TerminalConfigurationDataResponseActivity"/>
-
+        <activity android:name=".GeneratePanTokenResponseActivity" />
+        <activity android:name=".ExecuteConfigurationActivity" />
+        <activity android:name=".ExecuteInitialisationActivity" />
+        <activity android:name=".ConfigurationResultActivity" />
+        <activity android:name=".InitialisationResultActivity" />
+        <activity android:name=".TerminalConfigurationDataActivity" />
+        <activity android:name=".TerminalConfigurationDataResponseActivity" />
         <activity
             android:name=".PinpadInformationResponseActivity"
             android:exported="false" />
