@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
         <item
+            android:id="@+id/action_deeplink_transaction"
+            android:title="@string/deep_link_transaction"
+            android:icon="@drawable/ic_deep_link"
+            app:showAsAction="ifRoom" />
+
+        <item
             android:id="@+id/action_enable_system_bar"
             android:title="@string/enable_system_bar"
             app:showAsAction="never" />
@@ -22,9 +28,4 @@
             android:icon="@drawable/ic_wallee_settings"
             app:showAsAction="never" />
 
-        <item
-            android:id="@+id/action_deeplink_transaction"
-            android:title="@string/deep_link_transaction"
-            android:icon="@drawable/ic_wallee_settings"
-            app:showAsAction="never" />
 </menu>

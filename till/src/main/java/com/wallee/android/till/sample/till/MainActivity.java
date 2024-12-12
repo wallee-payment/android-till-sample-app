@@ -154,11 +154,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startDeepLinkTransaction() {
-        startActivity(new Intent(this, DeepLinkActivity.class));
-        /*String request = "wallee://v1/transaction?currencyCode=CHF&reserveReference=920514&transactionTypeDeepLink=PURCHASE&acquirerId=99999999998&lineItems[0].name=Keyboard&lineItems[0].type=PRODUCT&lineItems[0].quantity=1&lineItems[0].totalAmountIncludingTax=10.00&lineItems[1].name=Mouse&lineItems[1].type=PRODUCT&lineItems[1].quantity=2&lineItems[1].totalAmountIncludingTax=20.00&merchantReference=Ref123_in_ASCII_PRINTABLE_CHARS&invoiceMerchantReference=Inv123&callback=till://v1?extra_arg1=19-02-2024&extra_arg2=Printers";
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(request));
-        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        this.startActivity(intent);*/
+        startActivity(new Intent(this, DeepLinkRequestActivity.class));
 
     }
 

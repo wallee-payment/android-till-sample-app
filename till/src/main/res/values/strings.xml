@@ -36,4 +36,20 @@
     <string name="configuration_data">Configuration Data</string>
     <string name="configuration_data_response">Configuration Data Response</string>
     <string name="depp_link_response">Depp Link Response</string>
+    <string name="error_decoding">Error decoding</string>
+    <string name="reserve_reference">Reserve Reference</string>
+    <string name="acquirer_id">Acquirer ID</string>
+    <string name="start_request">Start Request</string>
+    <string name="currency_code">Currency Code</string>
+    <string name="transaction_type">Transaction Type</string>
+    <string name="merchant_reference">Merchant Reference</string>
+    <string name="invoice_merchant_reference">Invoice Merchant Reference</string>
+    <string name="add_line_item">Add Line Item</string>
+    <string name="dropdown_icon">Dropdown Icon</string>
+    <string name="item">Item</string>
+    <string name="remove_line_item">Remove Line Item</string>
+    <string name="type">Type</string>
+    <string name="name">Name</string>
+    <string name="quantity">Quantity</string>
+    <string name="amount">Amount</string>
 </resources>

@@ -23,23 +23,32 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.focus.FocusManager
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.wallee.android.till.sample.till.common.GetAllCurrenciesUseCase
 import com.wallee.android.till.sample.till.model.DPLineItem
 import com.wallee.android.till.sample.till.model.DeepLinkRequest
+import com.wallee.android.till.sample.till.model.ItemType
+import com.wallee.android.till.sample.till.model.TransactionType
+import com.wallee.android.till.sample.till.ui.theme.AppTheme
 
 
-class DeepLinkActivity : ComponentActivity() {
+class DeepLinkRequestActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            DeepLinkScreen()
+            AppTheme {
+                DeepLinkScreen()
+            }
         }
     }
 }
@@ -50,84 +59,100 @@ fun DeepLinkScreen() {
     val lineItems = remember { mutableStateListOf(DPLineItem()) }
     val context = LocalContext.current as Activity
     val scrollState = rememberScrollState()
-    val transactionTypes = listOf(
-        "PURCHASE",
-        "CREDIT",
-        "RESERVATION",
-        "RESERVATION_ADJ",
-        "PURCHASE_RESERVATION",
-        "CANCEL_RESERVATION"
-    )
+    val keyboardController = LocalSoftwareKeyboardController.current
+    val transactionTypes = TransactionType.entries.map { it.value }
     val currencies = GetAllCurrenciesUseCase().execute().map { it.shortName }
     val focusManager = LocalFocusManager.current
-    val keyboardController = LocalSoftwareKeyboardController.current
-
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
-            .verticalScroll(scrollState),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            .verticalScroll(scrollState)
+            .pointerInput(Unit) {
+                detectTapGestures(onTap = {
+                    keyboardController?.hide()
+                    focusManager.clearFocus()
+                })
+            },
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
 
         DropdownMenuSpinner(
             selectedItem = deepLinkRequest.value.currencyCode,
             items = currencies,
-            label = "Currency Code",
-            onItemSelected = { deepLinkRequest.value = deepLinkRequest.value.copy(currencyCode = it) }
+            label = stringResource(R.string.currency_code),
+            onItemSelected = { newCurrencyCode ->
+                deepLinkRequest.value = deepLinkRequest.value.copy(currencyCode = newCurrencyCode)
+            }
         )
 
         DropdownMenuSpinner(
             selectedItem = deepLinkRequest.value.transactionType,
             items = transactionTypes,
-            label = "Transaction Type",
-            onItemSelected = {
-                deepLinkRequest.value = deepLinkRequest.value.copy(transactionType = it)
+            label = stringResource(R.string.transaction_type),
+            onItemSelected = { newTransactionType ->
+                deepLinkRequest.value = deepLinkRequest.value.copy(transactionType = newTransactionType)
             }
         )
 
         if (deepLinkRequest.value.transactionType in listOf(
-                "PURCHASE",
-                "CREDIT",
-                "RESERVATION",
-                "RESERVATION_ADJ"
+                TransactionType.PURCHASE.value,
+                TransactionType.CREDIT.value,
+                TransactionType.RESERVATION.value,
+                TransactionType.RESERVATION_ADJ.value
             )
         ) {
 
 
             OutlinedTextField(
                 value = deepLinkRequest.value.merchantReference,
-                onValueChange = {
-                    deepLinkRequest.value = deepLinkRequest.value.copy(merchantReference =  it)
+                onValueChange = { newMerchantReferenceValue ->
+                    deepLinkRequest.value = deepLinkRequest.value.copy(merchantReference = newMerchantReferenceValue)
                 },
-                label = { Text("Merchant Reference") },
+                label = { Text(stringResource(R.string.merchant_reference)) },
                 modifier = Modifier.fillMaxWidth(),
-                keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
-                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done)
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Next
+                ),
+                keyboardActions = KeyboardActions(
+                    onNext = {
+                        focusManager.moveFocus(FocusDirection.Down)
+                    }
+                )
+
             )
 
             OutlinedTextField(
                 value = deepLinkRequest.value.invoiceMerchantReference,
-                onValueChange = {
-                    deepLinkRequest.value = deepLinkRequest.value.copy(invoiceMerchantReference =  it)
+                onValueChange = { newInvoiceMerchantReference ->
+                    deepLinkRequest.value =
+                        deepLinkRequest.value.copy(invoiceMerchantReference = newInvoiceMerchantReference)
                 },
-                label = { Text("Invoice Merchant Reference") },
+                label = { Text(stringResource(R.string.invoice_merchant_reference)) },
                 modifier = Modifier.fillMaxWidth(),
-                keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
-                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done)
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Next
+                ),
+                keyboardActions = KeyboardActions(
+                    onNext = {
+                        focusManager.moveFocus(FocusDirection.Down)
+                    }
+                )
             )
         }
 
 
         if (deepLinkRequest.value.transactionType in listOf(
-                "PURCHASE",
-                "CREDIT",
-                "RESERVATION",
-                "RESERVATION_ADJ",
-                "PURCHASE_RESERVATION"
+                TransactionType.PURCHASE.value,
+                TransactionType.CREDIT.value,
+                TransactionType.RESERVATION.value,
+                TransactionType.RESERVATION_ADJ.value,
+                TransactionType.PURCHASE_RESERVATION.value
             )
         ) {
+
+            Spacer(modifier = Modifier.height(16.dp))
 
             lineItems.forEachIndexed { index, item ->
                 LineItemFields(
@@ -142,7 +167,8 @@ fun DeepLinkScreen() {
                         }
 
                     },
-                    showRemoveButton = lineItems.size > 1
+                    showRemoveButton = lineItems.size > 1,
+                    focusManager = focusManager
                 )
             }
 
@@ -150,49 +176,50 @@ fun DeepLinkScreen() {
                 onClick = {
                     lineItems.add(DPLineItem())
                 },
-                modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color.LightGray)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 8.dp),
 
-            ) {
+                ) {
                 Icon(
                     imageVector = Icons.Default.Add,
-                    contentDescription = "Add Line Item",
+                    contentDescription = stringResource(R.string.add_line_item),
                     modifier = Modifier.size(20.dp)
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                Text("+ Add Line Item")
+                Text(stringResource(R.string.add_line_item))
             }
 
 
         }
 
 
-
         if (deepLinkRequest.value.transactionType in listOf(
-                "RESERVATION_ADJ",
-                "PURCHASE_RESERVATION",
-                "CANCEL_RESERVATION"
+                TransactionType.RESERVATION_ADJ.value,
+                TransactionType.PURCHASE_RESERVATION.value,
+                TransactionType.CANCEL_RESERVATION.value
             )
         ) {
             OutlinedTextField(
                 value = deepLinkRequest.value.reserveReference,
                 onValueChange = { reserveReference ->
-                    deepLinkRequest.value = deepLinkRequest.value.copy(reserveReference = reserveReference.trim())
+                    deepLinkRequest.value =
+                        deepLinkRequest.value.copy(reserveReference = reserveReference.trim())
                 },
-                label = { Text("Reserve Reference") },
+                label = { Text(stringResource(R.string.reserve_reference)) },
                 modifier = Modifier.fillMaxWidth(),
                 keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
                 keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done)
             )
         }
 
-        if (deepLinkRequest.value.transactionType == "CANCEL_RESERVATION") {
+        if (deepLinkRequest.value.transactionType == TransactionType.CANCEL_RESERVATION.value) {
             OutlinedTextField(
                 value = deepLinkRequest.value.acquirerId,
                 onValueChange = {
                     deepLinkRequest.value = deepLinkRequest.value.copy(acquirerId = it)
                 },
-                label = { Text("Acquirer ID") },
+                label = { Text(stringResource(R.string.acquirer_id)) },
                 modifier = Modifier.fillMaxWidth(),
                 keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
                 keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done)
@@ -203,7 +230,7 @@ fun DeepLinkScreen() {
 
         Button(
             onClick = {
-                deepLinkRequest.value = deepLinkRequest.value.copy(DPLineItems = lineItems)
+                deepLinkRequest.value = deepLinkRequest.value.copy(dlLineItems = lineItems)
                 val deepLinkUrl = deepLinkRequest.value.generateV1Request()
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(deepLinkUrl))
                 intent.flags = (Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -211,16 +238,16 @@ fun DeepLinkScreen() {
             },
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Start Request")
+            Text(stringResource(R.string.start_request))
         }
 
         Button(
             onClick = {
-                context.finish()
+                    context.finish()
             },
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Return")
+            Text(stringResource(R.string.return_value))
         }
     }
 }
@@ -247,7 +274,7 @@ fun DropdownMenuSpinner(
                 IconButton(onClick = { expanded = !expanded }) {
                     Icon(
                         imageVector = Icons.Default.ArrowDropDown,
-                        contentDescription = "Dropdown Icon"
+                        contentDescription = stringResource(R.string.dropdown_icon)
                     )
                 }
             }
@@ -273,17 +300,18 @@ fun DropdownMenuSpinner(
 }
 
 
-
 @Composable
 fun LineItemFields(
     lineItem: DPLineItem,
     onLineItemChange: (DPLineItem) -> Unit,
     onRemoveItem: () -> Unit,
-    showRemoveButton: Boolean
+    showRemoveButton: Boolean,
+    focusManager: FocusManager
 ) {
 
     val keyboardController = LocalSoftwareKeyboardController.current
-    val focusManager = LocalFocusManager.current
+    val focusRequest = remember { FocusRequester() }
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -308,7 +336,7 @@ fun LineItemFields(
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(
-                text = "Item",
+                text = stringResource(R.string.item),
                 style = MaterialTheme.typography.titleSmall,
                 modifier = Modifier.weight(1f)
 
@@ -318,7 +346,7 @@ fun LineItemFields(
                 IconButton(onClick = onRemoveItem) {
                     Icon(
                         imageVector = Icons.Default.Delete,
-                        contentDescription = "Remove Line Item",
+                        contentDescription = stringResource(R.string.remove_line_item),
                         tint = Color.Red
                     )
                 }
@@ -329,8 +357,8 @@ fun LineItemFields(
 
         DropdownMenuSpinner(
             selectedItem = lineItem.type,
-            items = listOf("PRODUCT", "TIP"),
-            label = "Type",
+            items = ItemType.entries.map { it.value },
+            label = stringResource(R.string.type),
             onItemSelected = { newType ->
                 onLineItemChange(lineItem.copy(type = newType))
             }
@@ -342,13 +370,14 @@ fun LineItemFields(
             onValueChange = { newName ->
                 onLineItemChange(lineItem.copy(name = newName.trim()))
             },
-            label = { Text("Name") },
+            label = { Text(stringResource(R.string.name)) },
             modifier = Modifier.fillMaxWidth(),
-            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Next
+            ),
             keyboardActions = KeyboardActions(
-                onDone = {
-                    keyboardController?.hide()
-                    focusManager.clearFocus()
+                onNext = {
+                    focusManager.moveFocus(FocusDirection.Down)
                 }
             )
         )
@@ -359,13 +388,14 @@ fun LineItemFields(
                 val parseQuantity = newQuantity.toDoubleOrNull() ?: 1.0
                 onLineItemChange(lineItem.copy(quantity = parseQuantity))
             },
-            label = { Text("Quantity") },
+            label = { Text(stringResource(R.string.quantity)) },
             modifier = Modifier.fillMaxWidth(),
-            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Next
+            ),
             keyboardActions = KeyboardActions(
-                onDone = {
-                    keyboardController?.hide()
-                    focusManager.clearFocus()
+                onNext = {
+                    focusManager.moveFocus(FocusDirection.Down)
                 }
             )
         )
@@ -376,12 +406,13 @@ fun LineItemFields(
             onValueChange = { newAmount ->
                 onLineItemChange(lineItem.copy(totalAmountIncludingTax = newAmount.trim()))
             },
-            label = { Text("Amount") },
+            label = { Text(stringResource(R.string.amount)) },
             modifier = Modifier.fillMaxWidth(),
-            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Done
+            ),
             keyboardActions = KeyboardActions(
                 onDone = {
-                    keyboardController?.hide()
                     focusManager.clearFocus()
                 }
             )
