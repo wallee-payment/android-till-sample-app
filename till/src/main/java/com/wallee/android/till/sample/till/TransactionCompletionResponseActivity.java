@@ -22,7 +22,7 @@ public class TransactionCompletionResponseActivity extends AppCompatActivity {
 
         if (response != null) {
             if (response.getResultCode().getCode().equals(ErrorCode.ERR_CONNECTION_FAILED.getCode())) {
-                com.wallee.android.till.sample.till.Utils.showToast(this,getResources().getString(R.string.app_relaunch));
+                com.wallee.android.till.sample.till.Utils.INSTANCE.showToast(this,getResources().getString(R.string.app_relaunch));
                 Utils.handleFailedToConnectVpj(this);
             }
             TextView textViewResult = findViewById(R.id.textViewResult);

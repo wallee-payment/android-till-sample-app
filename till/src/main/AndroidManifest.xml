@@ -13,20 +13,21 @@
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".DeepLinkActivity"
+            android:name=".DeepLinkRequestActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
-            android:name=".DeepLinkResponse"
+            android:name=".DeepLinkResponseActivity"
             android:exported="true">
             <intent-filter android:label="WalleeDeepLink">
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
                     android:host="v1"
-                    android:scheme="till" />
+                    android:scheme="link"
+                    android:pathPattern="/response"/>
             </intent-filter>
         </activity>
 

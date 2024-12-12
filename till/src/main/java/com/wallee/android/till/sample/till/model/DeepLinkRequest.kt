@@ -1,22 +1,40 @@
 package com.wallee.android.till.sample.till.model
 
+import android.util.Base64
+import android.util.Log
+import com.wallee.android.till.sample.till.Utils
+
 data class DPLineItem(
     val name: String = "Terminal",
-    val type: String = "PRODUCT",
+    val type: String = ItemType.PRODUCT.value,
     val quantity: Double = 1.0,
-    val totalAmountIncludingTax: String= "10.00"
+    val totalAmountIncludingTax: String = "10.00"
 )
+
+enum class TransactionType(val value: String) {
+    PURCHASE("PURCHASE"),
+    CREDIT("CREDIT"),
+    RESERVATION("RESERVATION"),
+    RESERVATION_ADJ("RESERVATION_ADJ"),
+    PURCHASE_RESERVATION("PURCHASE_RESERVATION"),
+    CANCEL_RESERVATION("CANCEL_RESERVATION");
+}
+
+enum class ItemType(val value: String) {
+    PRODUCT("PRODUCT"),
+    TIP("TIP");
+}
 
 
 data class DeepLinkRequest(
     var currencyCode: String = "CHF",
-    var transactionType: String = "PURCHASE",
+    var transactionType: String = TransactionType.PURCHASE.value,
     var reserveReference: String = "",
     var acquirerId: String = "99999999998",
-    var merchantReference: String = "Ref123",
-    var invoiceMerchantReference: String = "Inv123",
-    var callbackUrl: String = "till://v1?extra_arg1=19-02-2024&extra_arg2=Printers",
-    var DPLineItems: List<DPLineItem> = listOf()
+    var merchantReference: String = "Merchant123",
+    var invoiceMerchantReference: String = "Invoice123",
+    var callbackUrl: String = "link://v1/response?extra_arg1=Keyboard&extra_arg2=Printers",
+    var dlLineItems: List<DPLineItem> = listOf()
 
 ) {
     fun generateV1Request(): String {
@@ -24,17 +42,30 @@ data class DeepLinkRequest(
         val parameters = mutableListOf<String>()
         parameters.add("currencyCode=$currencyCode")
         parameters.add("transactionTypeDeepLink=$transactionType")
-        if (acquirerId.isNotEmpty() && transactionType == "CANCEL_RESERVATION") parameters.add("acquirerId=$acquirerId")
+        if (acquirerId.isNotEmpty() && transactionType == TransactionType.CANCEL_RESERVATION.value) parameters.add(
+            "acquirerId=$acquirerId"
+        )
 
-        if (reserveReference.isNotEmpty() && transactionType in listOf("RESERVATION_ADJ", "PURCHASE_RESERVATION", "CANCEL_RESERVATION")) parameters.add("reserveReference=$reserveReference")
+        if (reserveReference.isNotEmpty() && transactionType in listOf(
+                TransactionType.RESERVATION_ADJ.value,
+                TransactionType.PURCHASE_RESERVATION.value,
+                TransactionType.CANCEL_RESERVATION.value
+            )
+        ) parameters.add("reserveReference=$reserveReference")
 
-        if (transactionType in listOf("PURCHASE", "CREDIT","RESERVATION","RESERVATION_ADJ")) {
+        if (transactionType in listOf(
+                TransactionType.PURCHASE.value,
+                TransactionType.CREDIT.value,
+                TransactionType.RESERVATION.value,
+                TransactionType.RESERVATION_ADJ.value
+            )
+        ) {
             parameters.add("merchantReference=$merchantReference")
             parameters.add("invoiceMerchantReference=$invoiceMerchantReference")
 
         }
 
-        DPLineItems.forEachIndexed { index, item ->
+        dlLineItems.forEachIndexed { index, item ->
             parameters.add("lineItems[$index].name=${item.name}")
             parameters.add("lineItems[$index].type=${item.type}")
             parameters.add("lineItems[$index].quantity=${item.quantity}")
@@ -43,7 +74,12 @@ data class DeepLinkRequest(
 
         parameters.add("callback=$callbackUrl")
 
-        return "$base?${parameters.joinToString("&")}"
+        val params = parameters.joinToString("&")
+
+        val encodeParameters = Utils.encodeToBase64(params)
+
+        return "$base?${encodeParameters}"
     }
+
 }
 
