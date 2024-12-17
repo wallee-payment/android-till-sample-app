@@ -16,7 +16,7 @@ public class TransactionResponseActivity extends AppCompatActivity {
         setContentView(com.wallee.android.till.sample.interception.R.layout.transaction_response_activity);
         TransactionResponse response = Utils.getTransactionResponse(getIntent().getExtras());
         TillLog.debug("Log transaction response  -> " + responseToString(response));
-        
+
         if (response != null) {
             TextView textViewResult = findViewById(com.wallee.android.till.sample.interception.R.id.textViewResult);
             textViewResult.setText(responseToString(response));
@@ -44,6 +44,8 @@ public class TransactionResponseActivity extends AppCompatActivity {
                 "cardAppId - " + response.getCardAppId() + "\n" +
                 "amountTip - " + response.getAmountTip() + "\n" +
                 "panToken - " + response.getPanToken() + "\n" +
-                "merchantReference - " + response.getMerchantReference();
+                "merchantReference - " + response.getMerchantReference() + "\n" +
+                "transactionSyncNumber - " + response.getTransactionSyncNumber() + "\n" +
+                "paymentEntryMethod - " + response.getPaymentEntryMethod();
     }
 }
