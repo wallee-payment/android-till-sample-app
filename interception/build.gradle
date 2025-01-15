@@ -38,7 +38,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.15.0'
 
     if (getCurrentGitBranch().equalsIgnoreCase("master")) {
-        implementation 'com.wallee.android.till:sdk:0.9.17'
+        implementation 'com.wallee.android.till:sdk:0.9.23'
     } else {
         implementation 'com.wallee.android.till:sdk-dev:0.9.23-SNAPSHOT'
     }
