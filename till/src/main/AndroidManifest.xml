@@ -71,6 +71,8 @@
         <activity android:name=".InitialisationResultActivity" />
         <activity android:name=".TerminalConfigurationDataActivity" />
         <activity android:name=".TerminalConfigurationDataResponseActivity" />
+        <activity android:name=".GetCustomConfigurationActivity"/>
+        <activity android:name=".GetCustomConfigurationResponseActivity"/>
         <activity
             android:name=".PinpadInformationResponseActivity"
             android:exported="false" />

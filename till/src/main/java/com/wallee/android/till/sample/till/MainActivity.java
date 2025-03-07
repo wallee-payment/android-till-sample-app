@@ -78,6 +78,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, ExecuteInitialisationActivity.class));
         });
 
+        findViewById(R.id.getCustomConfig).setOnClickListener(v -> {
+            startActivity(new Intent(this, GetCustomConfigurationActivity.class));
+        });
+
         findViewById(R.id.exit).setOnClickListener(v -> {
             finish();
         });
