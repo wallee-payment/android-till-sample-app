@@ -52,4 +52,8 @@
     <string name="name">Name</string>
     <string name="quantity">Quantity</string>
     <string name="amount">Amount</string>
+    <string name="customConfig">Custom Configuration</string>
+    <string name="enter_applicationid">Enter applicationId</string>
+    <string name="get">Get</string>
+    <string name="custom_configuration_result">Custom Configuration Result</string>
 </resources>

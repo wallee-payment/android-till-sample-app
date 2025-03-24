@@ -10,6 +10,7 @@ import com.wallee.android.till.sdk.data.ConfigurationResult;
 import com.wallee.android.till.sdk.data.FinalBalanceResult;
 import com.wallee.android.till.sdk.data.GeneratePanTokenResponse;
 import com.wallee.android.till.sdk.data.GetConfigDataResponse;
+import com.wallee.android.till.sdk.data.GetCustomConfigurationResponse;
 import com.wallee.android.till.sdk.data.GetPinpadInformationResponse;
 import com.wallee.android.till.sdk.data.InitialisationResult;
 import com.wallee.android.till.sdk.data.SubmissionResult;
@@ -105,6 +106,13 @@ class MockResponseHandler extends ResponseHandler {
     @Override
     public void executeInitialisationReply(InitialisationResult result) {
         Intent intent = new Intent(context, InitialisationResultActivity.class);
+        intent.putExtras(Utils.toBundle(result));
+        context.startActivity(intent);
+    }
+
+    @Override
+    public void executeGetCustomConfigurationResponse(GetCustomConfigurationResponse result) {
+        Intent intent = new Intent(context, GetCustomConfigurationResponseActivity.class);
         intent.putExtras(Utils.toBundle(result));
         context.startActivity(intent);
     }
