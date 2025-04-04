@@ -42,6 +42,14 @@ public class CancellationResultActivity extends AppCompatActivity {
                 "terminalId - " + result.getTerminalId() + "\n" +
                 "sequenceCount - " + result.getSequenceCount() + "\n" +
                 "cancelledSequenceCount - " + result.getCancelledSequenceCount() + "\n" +
+                "amountRev - " + result.getTransactionAmount() + "\n" +
+                "amountRevCurr - " + result.getTransactionCurrency() + "\n" +
+                "cardNumber - " + result.getCardNumber() + "\n" +
+                "cardSeqNumber - " + result.getCardSeqNumber() + "\n" +
+                "cardExpDate - " + result.getCardExpDate() + "\n" +
+                "cardAppLabel - " + result.getCardAppLabel() + "\n" +
+                "cardAppId - " + result.getCardAppId() + "\n" +
+                "acquirerId - " + result.getAcquirerId() + "\n" +
                 "transactionTime - " + result.getTransactionTime() + "\n" +
                 "receipts - " + result.getReceipts();
     }
