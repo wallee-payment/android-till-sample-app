@@ -45,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, CancelLastTransactionOperationActivity.class));
         });
 
+        findViewById(R.id.reprintReceipt).setOnClickListener(v -> {
+            startActivity(new Intent(this, ReprintReceiptActivity.class));
+        });
+
         findViewById(R.id.executeTransmission).setOnClickListener(v -> {
             startActivity(new Intent(this, ExecuteTransmissionActivity.class));
         });
