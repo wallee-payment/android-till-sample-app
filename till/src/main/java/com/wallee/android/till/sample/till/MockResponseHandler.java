@@ -13,6 +13,7 @@ import com.wallee.android.till.sdk.data.GetConfigDataResponse;
 import com.wallee.android.till.sdk.data.GetCustomConfigurationResponse;
 import com.wallee.android.till.sdk.data.GetPinpadInformationResponse;
 import com.wallee.android.till.sdk.data.InitialisationResult;
+import com.wallee.android.till.sdk.data.ReprintReceiptResponse;
 import com.wallee.android.till.sdk.data.SubmissionResult;
 import com.wallee.android.till.sdk.data.TransactionCompletionResponse;
 import com.wallee.android.till.sdk.data.TransactionResponse;
@@ -113,6 +114,13 @@ class MockResponseHandler extends ResponseHandler {
     @Override
     public void executeGetCustomConfigurationResponse(GetCustomConfigurationResponse result) {
         Intent intent = new Intent(context, GetCustomConfigurationResponseActivity.class);
+        intent.putExtras(Utils.toBundle(result));
+        context.startActivity(intent);
+    }
+
+    @Override
+    public void executeReprintReceipt(ReprintReceiptResponse result) {
+        Intent intent = new Intent(context, ReprintReceiptResponseActivity.class);
         intent.putExtras(Utils.toBundle(result));
         context.startActivity(intent);
     }

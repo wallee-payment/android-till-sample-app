@@ -73,6 +73,8 @@
         <activity android:name=".TerminalConfigurationDataResponseActivity" />
         <activity android:name=".GetCustomConfigurationActivity"/>
         <activity android:name=".GetCustomConfigurationResponseActivity"/>
+        <activity android:name=".ReprintReceiptActivity"/>
+        <activity android:name=".ReprintReceiptResponseActivity"/>
         <activity
             android:name=".PinpadInformationResponseActivity"
             android:exported="false" />

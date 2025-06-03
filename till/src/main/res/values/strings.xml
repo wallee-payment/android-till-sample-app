@@ -56,4 +56,5 @@
     <string name="enter_applicationid">Enter applicationId</string>
     <string name="get">Get</string>
     <string name="custom_configuration_result">Custom Configuration Result</string>
+    <string name="reprint_receipt">Reprint Receipt</string>
 </resources>
