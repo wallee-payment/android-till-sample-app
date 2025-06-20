@@ -42,6 +42,7 @@
     <string name="start_request">Start Request</string>
     <string name="currency_code">Currency Code</string>
     <string name="transaction_type">Transaction Type</string>
+    <string name="show_trx_result_screen">Show Trx Result Screen</string>
     <string name="merchant_reference">Merchant Reference</string>
     <string name="invoice_merchant_reference">Invoice Merchant Reference</string>
     <string name="add_line_item">Add Line Item</string>

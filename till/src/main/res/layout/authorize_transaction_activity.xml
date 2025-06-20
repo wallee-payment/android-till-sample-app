@@ -65,7 +65,7 @@
             android:id="@+id/selectLanguage"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
             android:text="Choose Language"
             app:layout_constraintStart_toStartOf="parent"
@@ -81,21 +81,31 @@
             app:layout_constraintTop_toBottomOf="@+id/languageSpinner" />
 
         <CheckBox
+            android:id="@+id/showTrxResultScreens"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:checked="true"
+            android:text="ShowTrxResScreen"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toEndOf="@id/generatePanToken"
+            app:layout_constraintTop_toBottomOf="@+id/languageSpinner" />
+
+        <CheckBox
             android:id="@+id/shouldReserve"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="32dp"
             android:text="Reserve"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/selectLanguage"
             app:layout_constraintTop_toBottomOf="@+id/editTextCustomText" />
 
         <Spinner
             android:id="@+id/languageSpinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:gravity="top"
             tools:visibility="visible"
@@ -118,7 +128,7 @@
             android:layout_height="50dp"
             android:text="Adjust reservation"
             android:layout_marginTop="16dp"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/generatePanToken"/>
 
