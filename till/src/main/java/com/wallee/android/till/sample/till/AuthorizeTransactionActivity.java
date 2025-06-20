@@ -83,7 +83,8 @@ public class AuthorizeTransactionActivity extends AppCompatActivity {
                     .setInvoiceReference("1")
                     .setMerchantReference("MREF-123")
                     .setTransactionProcessingBehavior(behavior)
-                    .setGeneratePanToken(binding.generatePanToken.isChecked());
+                    .setGeneratePanToken(binding.generatePanToken.isChecked())
+                    .setShowTrxResultScreens(binding.showTrxResultScreens.isChecked());
             if (!customTextString.isEmpty()) {
                 transactionBuilder.setCustomText(customTextString);
             }

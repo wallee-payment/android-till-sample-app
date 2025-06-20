@@ -38,6 +38,7 @@ import com.wallee.android.till.sample.till.common.GetAllCurrenciesUseCase
 import com.wallee.android.till.sample.till.model.DPLineItem
 import com.wallee.android.till.sample.till.model.DeepLinkRequest
 import com.wallee.android.till.sample.till.model.ItemType
+import com.wallee.android.till.sample.till.model.ShowTrxResultScreen
 import com.wallee.android.till.sample.till.model.TransactionType
 import com.wallee.android.till.sample.till.ui.theme.AppTheme
 
@@ -63,6 +64,7 @@ fun DeepLinkScreen() {
     val transactionTypes = TransactionType.entries.map { it.value }
     val currencies = GetAllCurrenciesUseCase().execute().map { it.shortName }
     val focusManager = LocalFocusManager.current
+    val showResultScreenTypes = ShowTrxResultScreen.entries.map { it.value }
 
     Column(
         modifier = Modifier
@@ -141,6 +143,15 @@ fun DeepLinkScreen() {
                 )
             )
         }
+
+        DropdownMenuSpinner(
+            selectedItem = deepLinkRequest.value.showTrxResultScreens,
+            items = showResultScreenTypes,
+            label = stringResource(R.string.show_trx_result_screen),
+            onItemSelected = { newShowResultScreens ->
+                deepLinkRequest.value = deepLinkRequest.value.copy(showTrxResultScreens = newShowResultScreens)
+            }
+        )
 
 
         if (deepLinkRequest.value.transactionType in listOf(

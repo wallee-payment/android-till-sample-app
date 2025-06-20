@@ -25,6 +25,11 @@ enum class ItemType(val value: String) {
     TIP("TIP");
 }
 
+enum class ShowTrxResultScreen(val value: String) {
+    TRUE("true"),
+    FALSE("false");
+}
+
 
 data class DeepLinkRequest(
     var currencyCode: String = "CHF",
@@ -34,7 +39,8 @@ data class DeepLinkRequest(
     var merchantReference: String = "Merchant123",
     var invoiceMerchantReference: String = "Invoice123",
     var callbackUrl: String = "link://v1/response?extra_arg1=Keyboard&extra_arg2=Printers",
-    var dlLineItems: List<DPLineItem> = listOf()
+    var dlLineItems: List<DPLineItem> = listOf(),
+    var showTrxResultScreens: String = ShowTrxResultScreen.TRUE.value //Default is true
 
 ) {
     fun generateV1Request(): String {
@@ -63,6 +69,10 @@ data class DeepLinkRequest(
             parameters.add("merchantReference=$merchantReference")
             parameters.add("invoiceMerchantReference=$invoiceMerchantReference")
 
+        }
+
+        if (showTrxResultScreens.isNotEmpty()) {
+            parameters.add("showTrxResultScreens=$showTrxResultScreens")
         }
 
         dlLineItems.forEachIndexed { index, item ->
