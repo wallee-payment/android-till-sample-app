@@ -50,6 +50,7 @@ public class AuthorizeTransactionActivity extends AppCompatActivity {
         String currencyString = binding.currencySpinner.getSelectedItem().toString();
         String customTextString = getTextAsString(binding.editTextCustomText);
         String transactionRefNumber = getTextAsString(binding.editTextTransactionRef);
+        String merchantReference = getTextAsString(binding.editMerchantReferenceText);
 
         // For credit transactions the value has to be negative Ex: -10.00
 
@@ -81,7 +82,7 @@ public class AuthorizeTransactionActivity extends AppCompatActivity {
             Transaction.Builder transactionBuilder = new Transaction.Builder(lineItems)
                     .setCurrency(Currency.getInstance(currencyString))
                     .setInvoiceReference("1")
-                    .setMerchantReference("MREF-123")
+                    .setMerchantReference(merchantReference)
                     .setTransactionProcessingBehavior(behavior)
                     .setGeneratePanToken(binding.generatePanToken.isChecked())
                     .setShowTrxResultScreens(binding.showTrxResultScreens.isChecked());

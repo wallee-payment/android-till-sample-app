@@ -13,7 +13,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 35
         versionCode 1
-        versionName "1.0"
+        versionName "1.0-${getCurrentGitCommitSha()}"
     }
 
     buildTypes {
@@ -71,16 +71,24 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling"
 }
 
-def getCurrentGitBranch() {
-    def gitBranch = "Unknown branch"
+def getCommandResult(cmd) {
+    def output = "unknown"
     try {
         def workingDir = new File("${project.projectDir}")
-        def result = 'git rev-parse --abbrev-ref HEAD'.execute(null, workingDir)
+        def result = cmd.execute(null, workingDir)
         result.waitFor()
         if (result.exitValue() == 0) {
-            gitBranch = result.text.trim()
+            output = result.text.trim()
         }
     } catch (e) {
     }
-    return gitBranch
+    return output
+}
+
+def getCurrentGitBranch() {
+    return getCommandResult('git rev-parse --abbrev-ref HEAD')
+}
+
+def getCurrentGitCommitSha() {
+    return getCommandResult('git rev-parse --short HEAD')
 }
