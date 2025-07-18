@@ -3,6 +3,7 @@ package com.wallee.android.till.sample.till;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -90,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
             finish();
         });
 
+        setTitle("Till Sample " + getAppVersion());
+
         // init & bind
         TillLog.getInstance().bind(this);
 
@@ -120,6 +123,14 @@ public class MainActivity extends AppCompatActivity {
                     this.isSystemBarEnabled = false;
                 }
             }
+        }
+    }
+
+    private String getAppVersion() {
+        try {
+            return getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+        }  catch (PackageManager.NameNotFoundException e) {
+            return "unknown";
         }
     }
 
