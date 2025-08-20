@@ -102,8 +102,8 @@
             android:text="ShowTrxResScreen"
             android:layout_marginTop="16dp"
             android:layout_marginStart="10dp"
-            app:layout_constraintStart_toEndOf="@id/generatePanToken"
-            app:layout_constraintTop_toBottomOf="@+id/languageSpinner" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/generatePanToken" />
 
         <CheckBox
             android:id="@+id/shouldReserve"
@@ -144,7 +144,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginStart="10dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/generatePanToken"/>
+            app:layout_constraintTop_toBottomOf="@id/showTrxResultScreens"/>
 
         <Button
             android:id="@+id/authorizeButton"
