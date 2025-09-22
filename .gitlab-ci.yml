@@ -1,0 +1,38 @@
+# .gitlab-ci.yml – Android Till build pipeline (non-interactive sdkmanager)
+# Builds on MR, dev, master. Publishes :till debug APKs come artifacts.
+
+image: ghcr.io/cirruslabs/android-sdk:35
+
+stages:
+  - build
+
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == "master" || $CI_COMMIT_BRANCH == "dev"'
+    - when: never
+
+cache:
+  key:
+    files:
+      - gradle/wrapper/gradle-wrapper.properties
+      - build.gradle
+  paths:
+    - .gradle/
+
+build_till_debug:
+  stage: build
+  script:
+    - chmod +x ./gradlew
+    - ./gradlew :till:clean :till:assembleDebug --stacktrace
+  artifacts:
+    when: always
+    expire_in: 7 days
+    paths:
+      - till/build/outputs/apk/**/*.apk
+      - till/build/reports/**
+      - till/build/outputs/logs/**
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == "dev"'
+    - if: '$CI_COMMIT_BRANCH == "master"'

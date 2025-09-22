@@ -1,4 +1,4 @@
-#built application files
+# built application files
 *.apk
 *.ap_
 
@@ -13,10 +13,11 @@ bin/
 gen/
 out/
 
-# Gradle files
+# Gradle caches 
 .gradle/
 build/
 gradle/
+!gradle/wrapper/
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -30,7 +31,7 @@ local.properties
 # Android Studio captures folder
 captures/
 
-# Intellij
+# IntelliJ
 *.iml
 **/*.tml
 .idea/
@@ -38,12 +39,13 @@ captures/
 # Keystore files
 *.jks
 plugin
-# External native build folder generated in Android Studio 2.2 and later
+
+# External native build folder generated in Android Studio 2.2+
 .externalNativeBuild
 
-#macOS files
+# macOS files
 .DS_Store
 
-#Fastlane
+# Fastlane
 fastlane/report.xml
 fastlane/README.md
