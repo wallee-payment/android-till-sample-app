@@ -52,7 +52,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CheckApiServiceCompatibilityActivity" />
+        <activity android:name=".CheckApiServiceCompatibilityActivity"/>
         <activity android:name=".AuthorizeTransactionActivity" />
         <activity android:name=".TransactionResponseActivity" />
         <activity android:name=".CancelLastTransactionOperationActivity" />

@@ -1,0 +1,137 @@
+{
+    "test1_boolean": {
+        "type": "checkbox",
+        "title": {
+            "de": "Test 1",
+            "en": "Test 1"
+        },
+        "checkbox-text": {
+            "en": "Use this option (Kiosk)"
+        },
+        "description": {
+            "en": "This is a test configuration of type boolean.",
+            "de": "Dies ist eine Test-Konfiguration vom Typen 'boolean'."
+        },
+        "default-value": true
+    },
+    "test2_single_line_text": {
+        "type": "text",
+        "required": true,
+        "number-of-lines": 1,
+        "validation-pattern": "[a-zA-Z ]+",
+        "max-length": 10,
+        "title": {
+            "de": "Test 2 (Kiosk)",
+            "en": "Test 2 (Kiosk)"
+        },
+        "description": {
+            "en": "This is a test configuration of type test as single line."
+        },
+        "default-value": "ext"
+    },
+    "test3_multi_line_text": {
+        "type": "text",
+        "number-of-lines": 3,
+        "validation-pattern": "[a-zA-Z]+",
+        "max-length": 1000,
+        "title": {
+            "de": "Test 3 (Kiosk)",
+            "en": "Test 3 (Kiosk)"
+        },
+        "description": {
+            "en": "This is a test configuration of type test as multi line."
+        }
+    },
+    "test4_single_select": {
+        "type": "select",
+        "required": true,
+        "number-of-selectable-options": 1,
+        "title": {
+            "de": "Test 4 (Kiosk)",
+            "en": "Test 4 (Kiosk)"
+        },
+        "description": {
+            "en": "This is a test configuration of type single select."
+        },
+        "default-value": ["option2"],
+        "options": {
+            "option1": {
+                "title": {
+                    "en": "Option 1"
+                },
+                "description": {
+                    "en": "This is the first option."
+                }
+            },
+            "option2": {
+                "title": {
+                    "en": "Option 2"
+                },
+                "description": {
+                    "en": "This is the second option."
+                }
+            },
+            "option3": {
+                "title": {
+                    "en": "Option 3"
+                },
+                "description": {
+                    "en": "This is the third option."
+                }
+            }
+        }
+    },
+    "test5_multi_select": {
+        "type": "select",
+        "number-of-selectable-options": 2,
+        "title": {
+            "de": "Test 5 (Kiosk)",
+            "en": "Test 5 (Kiosk)"
+        },
+        "description": {
+            "en": "This is a test configuration of type multiple select."
+        },
+        "default-value": ["option2", "option3"],
+        "options": {
+            "option1": {
+                "title": {
+                    "en": "Option 1"
+                },
+                "description": {
+                    "en": "This is the first option."
+                }
+            },
+            "option2": {
+                "title": {
+                    "en": "Option 2"
+                },
+                "description": {
+                    "en": "This is the second option."
+                }
+            },
+            "option3": {
+                "title": {
+                    "en": "Option 3"
+                },
+                "description": {
+                    "en": "This is the third option."
+                }
+            }
+        }
+    },
+    "test6_checkbox_required": {
+        "type": "checkbox",
+        "required": true,
+        "title": {
+            "de": "Test 6 (Kiosk)",
+            "en": "Test 6 (Kiosk)"
+        },
+        "checkbox-text": {
+            "en": "Use this option"
+        },
+        "description": {
+            "en": "This is a test configuration of type boolean.",
+            "de": "Dies ist eine Test-Konfiguration vom Typen 'boolean'."
+        }
+    }
+}
