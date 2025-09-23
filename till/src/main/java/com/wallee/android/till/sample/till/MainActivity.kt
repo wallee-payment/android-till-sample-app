@@ -1,5 +1,6 @@
 package com.wallee.android.till.sample.till
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -54,7 +55,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             TillSampleApp(
-                appTitle = "",
+                appTitle = "$version",
                 isSystemBarEnabled = isSystemBarEnabled,
                 onToggleSystemBar = { enabled ->
                     if (enabled) enableSystemBar() else disableSystemBar()
@@ -63,7 +64,11 @@ class MainActivity : ComponentActivity() {
                 onOpenWalleeSettings = { walleeSettingsMenu() },
                 onStartServiceTrx = { startTransactionFromService() },
                 onStartDeepLinkTrx = { startDeepLinkTransaction() },
-                onExit = { finish() }
+                onExit = { finish() },
+                // Setting lambda to call function to open any app
+                onOpenAnyApp = { pkg ->
+                    openAppOrFallback(pkg)
+                }
             )
         }
     }
@@ -128,6 +133,15 @@ class MainActivity : ComponentActivity() {
     private fun enableSystemBar() = Utils.enableSystemBar(this)
     private fun disableSystemBar() = Utils.disableSystemBar(this)
     private fun walleeSettingsMenu() = Utils.openSettings(this)
+
+    // Logic to open the app
+    private fun openAppOrFallback(packageName: String) {
+        packageManager.getLaunchIntentForPackage(packageName)?.run {
+            // In case we want to call service
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(this)
+        }
+    }
 }
 
 /* ============================
@@ -144,11 +158,19 @@ private fun TillSampleApp(
     onStartServiceTrx: () -> Unit,
     onStartDeepLinkTrx: () -> Unit,
     onExit: () -> Unit,
+    // Callback to open any app
+    onOpenAnyApp: (String) -> Unit,
 ) {
     val context = LocalContext.current
+    var showOpenDialog by remember { mutableStateOf(false) }
+    var pkgInput by remember { mutableStateOf("com.wallee.VTIdemo") } // default
 
     val actions = remember {
         listOf(
+
+            Action("Open any app", Icons.Filled.Apps) {
+                showOpenDialog = true
+            },
             Action("Check API Service Compatibility", Icons.Filled.FindInPage) {
                 context.startActivity(Intent(context, CheckApiServiceCompatibilityActivity::class.java))
             },
@@ -286,6 +308,33 @@ private fun TillSampleApp(
                 }
             }
         }
+    }
+
+    // NEW: Dialog view to open any app
+    if (showOpenDialog) {
+        AlertDialog(
+            onDismissRequest = { showOpenDialog = false },
+            title = { Text("Enter package name") },
+            text = {
+                OutlinedTextField(
+                    value = pkgInput,
+                    onValueChange = { pkgInput = it },
+                    singleLine = true,
+                    label = { Text("e.g. com.wallee.vtidemo") },
+                    modifier = Modifier.fillMaxWidth()
+                )
+            },
+            confirmButton = {
+                TextButton(onClick = {
+                    val p = pkgInput.trim()
+                    if (p.isNotEmpty()) onOpenAnyApp(p)
+                    showOpenDialog = false
+                }) { Text("Open") }
+            },
+            dismissButton = {
+                TextButton(onClick = { showOpenDialog = false }) { Text("Cancel") }
+            }
+        )
     }
 }
 
