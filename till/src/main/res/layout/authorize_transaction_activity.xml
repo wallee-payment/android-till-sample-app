@@ -33,7 +33,7 @@
             android:ems="10"
             android:hint="Amount"
             android:inputType="numberSigned|numberDecimal"
-            android:text="10.00"
+            android:text="5.00"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewInfo" />
 
