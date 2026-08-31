@@ -51,9 +51,9 @@ public class AuthorizeTransactionActivity extends AppCompatActivity {
         String customTextString = getTextAsString(binding.editTextCustomText);
         String transactionRefNumber = getTextAsString(binding.editTextTransactionRef);
         String merchantReference = getTextAsString(binding.editMerchantReferenceText);
+        String orderId = getTextAsString(binding.editOrderIdText);
 
         // For credit transactions the value has to be negative Ex: -10.00
-
         if(binding.shouldReserve.isChecked() && binding.shouldAdjustReservation.isChecked()) {
             Toast.makeText(this, "Choose one: Reservation or Reservation adjustment", Toast.LENGTH_LONG).show();
         } else if (amountString.isEmpty()) {
@@ -62,8 +62,8 @@ public class AuthorizeTransactionActivity extends AppCompatActivity {
             Toast.makeText(this, "Reserve reference field is empty", Toast.LENGTH_LONG).show();
         } else {
             hideKeyboardFrom(AuthorizeTransactionActivity.this);
-
             TransactionProcessingBehavior behavior;
+
             if(binding.shouldReserve.isChecked()){
                 behavior = TransactionProcessingBehavior.RESERVE;
             } else if(binding.shouldAdjustReservation.isChecked()){
@@ -78,27 +78,32 @@ public class AuthorizeTransactionActivity extends AppCompatActivity {
                     .getListBuilder()
                     .build();
 
-            Transaction transaction;
-            Transaction.Builder transactionBuilder = new Transaction.Builder(lineItems)
-                    .setCurrency(Currency.getInstance(currencyString))
-                    .setInvoiceReference("1")
-                    .setMerchantReference(merchantReference)
-                    .setTransactionProcessingBehavior(behavior)
-                    .setGeneratePanToken(binding.generatePanToken.isChecked())
-                    .setShowTrxResultScreens(binding.showTrxResultScreens.isChecked());
-            if (!customTextString.isEmpty()) {
-                transactionBuilder.setCustomText(customTextString);
-            }
-            if (binding.selectLanguage.isChecked()) {
-                transactionBuilder.setLanguage(languageCode);
-            }
-            if(binding.shouldAdjustReservation.isChecked()) {
-                transactionBuilder.setTransactionRefNumber(transactionRefNumber);
-            }
-            transaction = transactionBuilder.build();
-            TillLog.debug("VSD Start Transaction of amount  -> " + amountString);
             try {
+                Transaction transaction;
+                Transaction.Builder transactionBuilder = new Transaction.Builder(lineItems)
+                        .setCurrency(Currency.getInstance(currencyString))
+                        .setInvoiceReference("1")
+                        .setMerchantReference(merchantReference)
+                        .setOrderId(orderId)
+                        .setTransactionProcessingBehavior(behavior)
+                        .setGeneratePanToken(binding.generatePanToken.isChecked())
+                        .setShowTrxResultScreens(binding.showTrxResultScreens.isChecked());
+
+                if (!customTextString.isEmpty()) {
+                    transactionBuilder.setCustomText(customTextString);
+                }
+                if (binding.selectLanguage.isChecked()) {
+                    transactionBuilder.setLanguage(languageCode);
+                }
+                if(binding.shouldAdjustReservation.isChecked()) {
+                    transactionBuilder.setTransactionRefNumber(transactionRefNumber);
+                }
+                transaction = transactionBuilder.build();
+
+                TillLog.debug("VSD Start Transaction of amount  -> " + amountString);
                 client.authorizeTransaction(transaction);
+            } catch (IllegalArgumentException e) {
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
             } catch (Exception e) {
                 e.printStackTrace();
             }

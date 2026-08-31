@@ -53,9 +53,9 @@ dependencies {
     implementation 'androidx.activity:activity:1.8.0'
 
     if (getCurrentGitBranch().equalsIgnoreCase("master")) {
-        implementation 'com.wallee.android.till:sdk:2.0.0'
+        implementation 'com.wallee.android.till:sdk:2.3.0'
     } else {
-        implementation 'com.wallee.android.till:sdk-dev:2.0.0-SNAPSHOT'
+        implementation 'com.wallee.android.till:sdk-dev:2.3.0-SNAPSHOT'
     }
 
     def composeBom = platform('androidx.compose:compose-bom:2025.09.00')
