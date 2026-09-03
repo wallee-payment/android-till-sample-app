@@ -17,6 +17,7 @@ import com.wallee.android.till.sample.till.model.Languages;
 import com.wallee.android.till.sdk.ApiClient;
 import com.wallee.android.till.sdk.TillLog;
 import com.wallee.android.till.sdk.data.LineItem;
+import com.wallee.android.till.sdk.data.MerchantServiceLocation;
 import com.wallee.android.till.sdk.data.Transaction;
 import com.wallee.android.till.sdk.data.TransactionProcessingBehavior;
 import java.math.BigDecimal;
@@ -87,10 +88,14 @@ public class AuthorizeTransactionActivity extends AppCompatActivity {
                         .setOrderId(orderId)
                         .setTransactionProcessingBehavior(behavior)
                         .setGeneratePanToken(binding.generatePanToken.isChecked())
-                        .setShowTrxResultScreens(binding.showTrxResultScreens.isChecked());
+                        .setShowTrxResultScreens(binding.showTrxResultScreens.isChecked())
+                        .setDisplayMessageSuppressionFlag(binding.displayMessageSuppressionFlag.isChecked());
 
                 if (!customTextString.isEmpty()) {
                     transactionBuilder.setCustomText(customTextString);
+                }
+                if (binding.includeMerchantServiceLocation.isChecked()) {
+                    transactionBuilder.setMerchantServiceLocation(createMerchantServiceLocation());
                 }
                 if (binding.selectLanguage.isChecked()) {
                     transactionBuilder.setLanguage(languageCode);
@@ -140,6 +145,9 @@ public class AuthorizeTransactionActivity extends AppCompatActivity {
 
     private void setupOnClickListener() {
         binding.selectLanguage.setOnCheckedChangeListener((buttonView, isChecked) -> setVisibleOrGone(binding.languageSpinner, isChecked));
+        binding.includeMerchantServiceLocation.setOnCheckedChangeListener(
+                (buttonView, isChecked) -> setMerchantServiceLocationFieldsVisible(isChecked)
+        );
 
         binding.authorizeButton.setOnClickListener(v -> {
             if (SystemClock.elapsedRealtime() - lastClickTime < 1000) {
@@ -153,6 +161,22 @@ public class AuthorizeTransactionActivity extends AppCompatActivity {
 
         binding.authorizeTransactionParent.setOnClickListener(v -> hideKeyboardFrom(AuthorizeTransactionActivity.this));
         binding.shouldAdjustReservation.setOnCheckedChangeListener((buttonView, isChecked) -> setVisibleOrGone(binding.editTextTransactionRef, isChecked));
+    }
+
+    private MerchantServiceLocation createMerchantServiceLocation() {
+        return new MerchantServiceLocation.Builder()
+                .setCity(getTextAsString(binding.editMerchantCity))
+                .setCountryCode(getTextAsString(binding.editMerchantCountryCode))
+                .setCountrySubdivisionCode(getTextAsString(binding.editMerchantCountrySubdivisionCode))
+                .setPostalCode(getTextAsString(binding.editMerchantPostalCode))
+                .build();
+    }
+
+    private void setMerchantServiceLocationFieldsVisible(boolean isVisible) {
+        setVisibleOrGone(binding.editMerchantCity, isVisible);
+        setVisibleOrGone(binding.editMerchantCountryCode, isVisible);
+        setVisibleOrGone(binding.editMerchantCountrySubdivisionCode, isVisible);
+        setVisibleOrGone(binding.editMerchantPostalCode, isVisible);
     }
 
     @Override
