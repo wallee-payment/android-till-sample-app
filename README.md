@@ -20,7 +20,7 @@ For each **Android Till Interface SDK** request we provide an activity where we 
 ### Activities
 - MainActivity: Provides example of how to send logs, invoke settings in wallee app, enable and disable navigation bar and request required Android 10 permissions.
 - CheckApiServiceCompatibilityActivity: Verify Wallee Android Till SDK compatibility.
-- AuthorizeTransactionActivity: Provides example of how to perform purchase, credit, reservation transactions, generate pan token and choose transactions language.
+- AuthorizeTransactionActivity: Provides example of how to perform purchase, credit, and reservation transactions, generate a PAN token, choose the transaction language, and provide a transaction-specific Merchant Service Location.
 - CompleteTransactionActivity: Provides example how to complete reservation.
 - VoidTransactionActivity: Provides example how to cancel reservations.
 - CancelLastTransactionOperationActivity: Provides example how to cancel last transaction.

@@ -86,6 +86,75 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editMerchantReferenceText" />
 
+        <CheckBox
+            android:id="@+id/includeMerchantServiceLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16dp"
+            android:text="Merchant Service Location"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editTextCustomText" />
+
+        <EditText
+            android:id="@+id/editMerchantCity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:hint="Merchant city"
+            android:inputType="text"
+            android:maxLength="48"
+            android:text="Zurich"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/includeMerchantServiceLocation" />
+
+        <EditText
+            android:id="@+id/editMerchantCountryCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:hint="Merchant country code"
+            android:inputType="number"
+            android:maxLength="3"
+            android:text="756"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editMerchantCity" />
+
+        <EditText
+            android:id="@+id/editMerchantCountrySubdivisionCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:hint="Merchant country subdivision code"
+            android:inputType="text"
+            android:maxLength="3"
+            android:text="ZH"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editMerchantCountryCode" />
+
+        <EditText
+            android:id="@+id/editMerchantPostalCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:hint="Merchant postal code"
+            android:inputType="textPostalAddress"
+            android:maxLength="12"
+            android:text="8001"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editMerchantCountrySubdivisionCode" />
 
         <CheckBox
             android:id="@+id/selectLanguage"
@@ -95,7 +164,7 @@
             android:layout_marginTop="20dp"
             android:text="Choose Language"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextCustomText" />
+            app:layout_constraintTop_toBottomOf="@id/editMerchantPostalCode" />
 
         <CheckBox
             android:id="@+id/generatePanToken"
@@ -118,6 +187,16 @@
             app:layout_constraintTop_toBottomOf="@+id/generatePanToken" />
 
         <CheckBox
+            android:id="@+id/displayMessageSuppressionFlag"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16dp"
+            android:text="Suppress display messages"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/showTrxResultScreens" />
+
+        <CheckBox
             android:id="@+id/shouldReserve"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -125,7 +204,7 @@
             android:layout_marginTop="20dp"
             android:text="Reserve"
             app:layout_constraintStart_toEndOf="@id/selectLanguage"
-            app:layout_constraintTop_toBottomOf="@+id/editTextCustomText" />
+            app:layout_constraintTop_toBottomOf="@id/editMerchantPostalCode" />
 
         <Spinner
             android:id="@+id/languageSpinner"
@@ -156,7 +235,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginStart="10dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/showTrxResultScreens"/>
+            app:layout_constraintTop_toBottomOf="@id/displayMessageSuppressionFlag"/>
 
         <Button
             android:id="@+id/authorizeButton"
