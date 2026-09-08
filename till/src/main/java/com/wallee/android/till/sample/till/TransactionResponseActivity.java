@@ -40,16 +40,28 @@ public class TransactionResponseActivity extends AppCompatActivity {
     }
 
     private String responseToString(TransactionResponse response) {
-        return "state - " + response.getState() + "\n" +
+        return "transaction - " + response.getTransaction() + "\n" +
+                "state - " + response.getState() + "\n" +
                 "resultCode code - " + response.getResultCode().getCode() + "\n" +
                 "resultCode description - " + response.getResultCode().getDescription() + "\n" +
-                "amount - " + response.getTransaction().getTotalAmountIncludingTax().toString() + "\n" +
                 "authorizationCode - " + response.getAuthorizationCode() + "\n" +
+                "authorizationResponseCode - " + response.getAuthorizationResponseCode() + "\n" +
+                "transactionResult - " + response.getTransactionResult() + "\n" +
+                "cardExpirationDate - " + response.getCardExpirationDate() + "\n" +
+                "cardSequenceNumber - " + response.getCardSequenceNumber() + "\n" +
+                "dccTransactionAmount - " + response.getDccTransactionAmount() + "\n" +
+                "dccTransactionCurrency - " + response.getDccTransactionCurrency() + "\n" +
+                "cvm - " + response.getCvm() + "\n" +
+                "amountRemaining - " + response.getAmountRemaining() + "\n" +
+                "amountAuth - " + response.getAmountAuth() + "\n" +
+                "amountAuthCurrency - " + response.getAmountAuthCurrency() + "\n" +
+                "partialApprovalFlag - " + response.getPartialApprovalFlag() + "\n" +
                 "terminalId - " + response.getTerminalId() + "\n" +
                 "sequenceCount - " + response.getSequenceCount() + "\n" +
                 "transactionTime - " + response.getTransactionTime() + "\n" +
                 "reserveReference - " + response.getReserveReference() + "\n" +
                 "acquirerId - " + response.getAcquirerId() + "\n" +
+                "cardNumber - " + response.getCardNumber() + "\n" +
                 "receipts - " + response.getReceipts() + "\n" +
                 "cardIssuingCountry - " + response.getCardIssuingCountry() + "\n" +
                 "cardAppLabel - " + response.getCardAppLabel() + "\n" +
@@ -57,8 +69,8 @@ public class TransactionResponseActivity extends AppCompatActivity {
                 "amountTip - " + response.getAmountTip() + "\n" +
                 "panToken - " + response.getPanToken() + "\n" +
                 "merchantReference - " + response.getMerchantReference() + "\n" +
-                "transactionSyncNumber - " + response.getTransactionSyncNumber() + "\n" +
-                "paymentEntryMethod - " + response.getPaymentEntryMethod();
+                "paymentEntryMethod - " + response.getPaymentEntryMethod() + "\n" +
+                "transactionSyncNumber - " + response.getTransactionSyncNumber();
 
     }
 }

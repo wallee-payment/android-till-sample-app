@@ -86,6 +86,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editMerchantReferenceText" />
 
+        <EditText
+            android:id="@+id/editTextTransactionSyncNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="transactionSyncNumber"
+            android:inputType="number"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextCustomText" />
+
         <CheckBox
             android:id="@+id/includeMerchantServiceLocation"
             android:layout_width="wrap_content"
@@ -94,7 +106,7 @@
             android:layout_marginTop="16dp"
             android:text="Merchant Service Location"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editTextCustomText" />
+            app:layout_constraintTop_toBottomOf="@id/editTextTransactionSyncNumber" />
 
         <EditText
             android:id="@+id/editMerchantCity"

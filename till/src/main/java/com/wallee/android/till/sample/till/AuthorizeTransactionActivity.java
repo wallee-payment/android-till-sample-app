@@ -53,6 +53,7 @@ public class AuthorizeTransactionActivity extends AppCompatActivity {
         String transactionRefNumber = getTextAsString(binding.editTextTransactionRef);
         String merchantReference = getTextAsString(binding.editMerchantReferenceText);
         String orderId = getTextAsString(binding.editOrderIdText);
+        String transactionSyncNumberString = getTextAsString(binding.editTextTransactionSyncNumber);
 
         // For credit transactions the value has to be negative Ex: -10.00
         if(binding.shouldReserve.isChecked() && binding.shouldAdjustReservation.isChecked()) {
@@ -102,6 +103,9 @@ public class AuthorizeTransactionActivity extends AppCompatActivity {
                 }
                 if(binding.shouldAdjustReservation.isChecked()) {
                     transactionBuilder.setTransactionRefNumber(transactionRefNumber);
+                }
+                if (!transactionSyncNumberString.isEmpty()) {
+                    transactionBuilder.setTransactionSyncNumber(Integer.parseInt(transactionSyncNumberString));
                 }
                 transaction = transactionBuilder.build();
 
