@@ -20,7 +20,7 @@ For each **Android Till Interface SDK** request we provide an activity where we 
 ### Activities
 - MainActivity: Provides example of how to send logs, invoke settings in wallee app, enable and disable navigation bar and request required Android 10 permissions.
 - CheckApiServiceCompatibilityActivity: Verify Wallee Android Till SDK compatibility.
-- AuthorizeTransactionActivity: Provides example of how to perform purchase, credit, and reservation transactions, generate a PAN token, choose the transaction language, and provide a transaction-specific Merchant Service Location.
+- AuthorizeTransactionActivity: Provides example of how to perform purchase, credit, and reservation transactions, generate a PAN token, choose the transaction language and accessibility mode, and provide a transaction-specific Merchant Service Location.
 - CompleteTransactionActivity: Provides example how to complete reservation.
 - VoidTransactionActivity: Provides example how to cancel reservations.
 - CancelLastTransactionOperationActivity: Provides example how to cancel last transaction.
@@ -31,6 +31,13 @@ For each **Android Till Interface SDK** request we provide an activity where we 
 - PinpadInformationActivity: Provides example how to get pinpad information (terminal ID, device serial number, space ID, merchant ID, and name).
 - ExecuteConfigurationActivity: Provides example how to perform a configuration.
 - ExecuteInitialisationActivity: Provides example how to perform a initialisation.
+
+### Accessibility mode
+
+The Authorize Transaction screen includes an **Accessibility mode**
+selector: Standard interface (default), Blind mode, and Colour-blind mode (currently unsupported).
+The selection is passed to `Transaction.Builder.setAccessMode` and applies only
+to that transaction. Terminal support is required.
 
 ### Handle Response
 - MockResponseHandler: Provide a example of how to handle response for all Wallee Android Till SDK requests.

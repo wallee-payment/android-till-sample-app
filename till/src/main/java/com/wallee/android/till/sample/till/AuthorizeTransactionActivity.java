@@ -16,6 +16,7 @@ import com.wallee.android.till.sample.till.model.Language;
 import com.wallee.android.till.sample.till.model.Languages;
 import com.wallee.android.till.sdk.ApiClient;
 import com.wallee.android.till.sdk.TillLog;
+import com.wallee.android.till.sdk.data.AccessibilityMode;
 import com.wallee.android.till.sdk.data.LineItem;
 import com.wallee.android.till.sdk.data.MerchantServiceLocation;
 import com.wallee.android.till.sdk.data.Transaction;
@@ -90,7 +91,8 @@ public class AuthorizeTransactionActivity extends AppCompatActivity {
                         .setTransactionProcessingBehavior(behavior)
                         .setGeneratePanToken(binding.generatePanToken.isChecked())
                         .setShowTrxResultScreens(binding.showTrxResultScreens.isChecked())
-                        .setDisplayMessageSuppressionFlag(binding.displayMessageSuppressionFlag.isChecked());
+                        .setDisplayMessageSuppressionFlag(binding.displayMessageSuppressionFlag.isChecked())
+                        .setAccessMode(AccessibilityMode.fromCode(binding.accessModeSpinner.getSelectedItemPosition()));
 
                 if (!customTextString.isEmpty()) {
                     transactionBuilder.setCustomText(customTextString);
