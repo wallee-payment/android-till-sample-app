@@ -208,6 +208,28 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/showTrxResultScreens" />
 
+        <TextView
+            android:id="@+id/accessModeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16dp"
+            android:labelFor="@id/accessModeSpinner"
+            android:text="@string/accessibility_mode"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/displayMessageSuppressionFlag" />
+
+        <Spinner
+            android:id="@+id/accessModeSpinner"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:entries="@array/accessibility_modes"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/accessModeLabel" />
+
         <CheckBox
             android:id="@+id/shouldReserve"
             android:layout_width="wrap_content"
@@ -247,7 +269,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginStart="10dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/displayMessageSuppressionFlag"/>
+            app:layout_constraintTop_toBottomOf="@id/accessModeSpinner"/>
 
         <Button
             android:id="@+id/authorizeButton"
